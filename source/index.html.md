@@ -6,8 +6,9 @@ language_tabs:
   - ruby: Ruby
 
 toc_footers:
-  - <a href='#'>Sign Up for a Developer Key</a>
-  - <a href='https://github.com/tripit/slate'>Documentation Powered by Slate</a>
+  - <a href="https://sheetsu.com/your-apis">Your APIs</a>
+  - <a href="https://sheetsu.com/pricing">Pricing</a>
+  - <a href="https://sheetsu.com/get-month-free">Refer a friend!</a>
 
 search: true
 ---
