@@ -22,3 +22,7 @@ build/
 _yardoc
 doc/
 .idea/
+
+# Deploy scripts
+deploy_production.sh
+build_production.sh
