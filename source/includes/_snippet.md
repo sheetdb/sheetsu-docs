@@ -10,7 +10,7 @@ Add below code before closing `</body>` tag.
 `<script src="//load.sheetsu.com?i=d0c5"></script>`
 
 # Read data from Spreadsheet
-```html
+```xml
 <!--
   This code will get 3 first rows from
   Google Spreadsheet and display them
@@ -48,7 +48,7 @@ Add below code before closing `</body>` tag.
   </table>
 </blockquote>
 
-```html
+```xml
 <!--
   This code will get all rows from
   Google Spreadsheet where role is parent
@@ -108,7 +108,7 @@ Attributes you can use to manipulate results are `sheetsu-limit` and `sheetsu-of
 *(We add a little bit of CSS styling to the results on the right)*
 
 # Save data to Spreadsheet
-```html
+```xml
 <!--
   This code will display form, which will
   save record to the Google Spreadsheet
