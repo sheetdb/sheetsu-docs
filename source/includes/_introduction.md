@@ -4,10 +4,6 @@
 
 You can view code examples in the area on the right. You can switch the programming language with the tabs in the top right. We provide examples in cURL, Ruby and some of them with our Snippet - which is pure HTML.
 
-<aside class="success">
-For quick start guides and tutorials go to Guides and tutorials section.
-</aside>
-
 Follow [@sheetsuhq](https://twitter.com/sheetsuhq) on Twitter for latest updates and news.
 
 # SDKs & Client libraries
