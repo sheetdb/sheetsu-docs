@@ -148,14 +148,14 @@ html, body {
   }
 
   // Section headers
-  .tocify-item[data-unique="introduction"], .tocify-item[data-unique="core"], .tocify-item[data-unique="other"] {
+  .tocify-item[data-unique="introduction"], .tocify-item[data-unique="core"], .tocify-item[data-unique="other"], .tocify-item[data-unique="snippet"] {
     text-transform: uppercase;
     margin-top: 1em;
     font-weight: bold;
     cursor: default !important;
   }
 
-  .tocify-focus[data-unique="introduction"], .tocify-focus[data-unique="core"], .tocify-focus[data-unique="other"] {
+  .tocify-focus[data-unique="introduction"], .tocify-focus[data-unique="core"], .tocify-focus[data-unique="other"], .tocify-focus[data-unique="snippet"] {
     background-color: transparent !important;
     box-shadow: none;
     color: $nav-text;
@@ -638,4 +638,72 @@ html, body {
 
 .highlight, .highlight .w {
   background-color: $code-bg;
+}
+
+.snippet-example {
+  .character-card {
+    border: 1px solid #E9E9E9;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 0 10px 10px 0;
+    display: inline-block;
+
+    img {
+      width: 60px;
+    }
+
+    .char-details {
+      display: inline-block;
+
+      p {
+        display: inline-block;
+        margin: 0 0 0 10px;
+        line-height: 24px;
+
+        strong {
+          margin-right: 8px;
+        }
+      }
+    }
+  }
+
+  .column-50 {
+    width: 60%;
+    color: #000;
+    margin-top: 1em;
+
+    input {
+      width: 100%;
+      margin-bottom: 8px;
+      padding: 6px 12px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      outline: none;
+    }
+
+    textarea {
+      width: 100%;
+      padding: 6px 12px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      outline: none;
+    }
+  }
+
+  .button-wrapper {    
+    .button {
+      background-color: #4487E9;
+      border: 2px solid #4487E9;
+      color: #fff;
+      border-radius: 8px;
+      padding: 6px 28px;
+      font-weight: 400;
+    }
+  }
+}
+
+table.snippet-example-table {
+  td {
+    background-color: transparent !important;
+  }
 }
