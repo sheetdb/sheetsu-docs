@@ -1,4 +1,5 @@
 # Other
+<a href="//github.com/sheetsu/docs/tree/master/source/includes/_other.md" target="_blank" class="gh-button"><i class="fa fa-github"></i> Edit on GitHub</a>
 
 # Multiple sheets
 ```shell

@@ -1,4 +1,5 @@
 # Snippet
+<a href="//github.com/sheetsu/docs/tree/master/source/includes/_snippet.md" target="_blank" class="gh-button"><i class="fa fa-github"></i> Edit on GitHub</a>
 
 The snippet is our "we are here for you" for all those, who don't want to play with any programming languages or development but want to have all the Sheetsu super powers on their websites.
 

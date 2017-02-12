@@ -1,4 +1,5 @@
 # Introduction
+<a href="//github.com/sheetsu/docs/tree/master/source/includes/_introduction.md" target="_blank" class="gh-button"><i class="fa fa-github"></i> Edit on GitHub</a>
 
 # Welcome
 
@@ -7,9 +8,8 @@ You can view code examples in the area on the right. You can switch the programm
 Follow [@sheetsuhq](https://twitter.com/sheetsuhq) on Twitter for latest updates and news.
 
 # SDKs & Client libraries
-Official libraries for the Sheetsu API are available in Ruby and JavaScript.
+Official libraries for the Sheetsu API are available in Ruby.
 
-* Node: [https://github.com/sheetsu/sheetsu-node](https://github.com/sheetsu/sheetsu-node)
 * Ruby: [https://github.com/sheetsu/sheetsu-ruby](https://github.com/sheetsu/sheetsu-ruby)
 
 # How to prepare spreadsheet
@@ -33,10 +33,10 @@ id | name | score
 To properly use Sheetsu, please paste Google Spreadsheets URL. Just copy the URL from the browser address bar. There's no need for sharing the Google Spreadsheet.
 
 ### Google Chrome
-![Spreadsheet URL in Google Chrome](images/chrome.png)
+![Spreadsheet URL in Google Chrome](../images/chrome.png)
 
 ### Safari
-![Spreadsheet URL in Safari](images/safari.png)
+![Spreadsheet URL in Safari](../images/safari.png)
 
 # About the API
 
