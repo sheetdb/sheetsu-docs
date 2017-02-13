@@ -5,7 +5,7 @@
 
 You can view code examples in the area on the right. You can switch the programming language with the tabs in the top right. We provide examples in cURL, Ruby and some of them with our Snippet - which is pure HTML.
 
-Follow [@sheetsuhq](https://twitter.com/sheetsuhq) on Twitter for latest updates and news.
+Follow <a href="https://twitter.com/sheetsuhq" target="_blank">@sheetsuhq</a> on Twitter for latest updates and news.
 
 # SDKs & Client libraries
 Official libraries for the Sheetsu API are available in Ruby.
@@ -14,7 +14,7 @@ Official libraries for the Sheetsu API are available in Ruby.
 
 # How to prepare spreadsheet
 
-Every spreadsheet should have the first row populated with column names. There are no mandatory fields or values you _need_ to have in your spreadsheet. The structure of the spreadsheet it's totally up to you. Just keep in mind, that the first row (row #1) is treated as there are column names.
+Every spreadsheet should have the first row populated with column names. There are no mandatory fields or values you _need_ to have in your spreadsheet. The structure of the spreadsheet is totally up to you. Just keep in mind, that the first row (row #1) is treated as there are column names.
 
 Column names can be anything. Strings, numbers, symbols, emojis 🙉 , anything.
 
@@ -22,10 +22,10 @@ You can [check example spreadsheet here](https://docs.google.com/spreadsheets/d/
 
 id | name | score
 ---|------|------
-1 | Peter | 43
+1 | Peter | 42
 2 | Lois | 89
 3 | Meg | 10
-4 | Chris | 43
+4 | Chris | 42
 5 | Stewie | 72
 
 # Google Spreadsheet URL
@@ -42,6 +42,6 @@ To properly use Sheetsu, please paste Google Spreadsheets URL. Just copy the URL
 
 The Sheetsu API is meant to provide a RESTful way to interact with a Google Spreadsheets. Our API uses HTTP response codes to indicate API errors. We use built-in HTTP features, like HTTP Basic authentication and HTTP verbs, which are understood by off-the-shelf HTTP clients.
 
-We support cross-origin resource sharing, allowing you to interact securely with our API from a client-side web application. JSON is returned by all API responses, including errors, although our API libraries convert responses to appropriate language-specific objects.
+We support cross-origin resource sharing. JSON is returned by all API responses, including errors, although our API libraries convert responses to appropriate language-specific objects.
 
 The requests in the right sidebar are designed to work as is. The sample requests are performed using our test API and test spreadsheet, which you can find [here](https://docs.google.com/spreadsheets/d/1WTwXrh2ZDXmXATZlQIuapdv4ldyhJGZg7LX8GlzPdZw/edit#gid=0).

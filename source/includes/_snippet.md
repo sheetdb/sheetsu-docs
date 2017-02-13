@@ -1,7 +1,7 @@
 # Snippet
 <a href="//github.com/sheetsu/docs/tree/master/source/includes/_snippet.md" target="_blank" class="gh-button"><i class="fa fa-github"></i> Edit on GitHub</a>
 
-The snippet is our "we are here for you" for all those, who don't want to play with any programming languages or development but want to have all the Sheetsu super powers on their websites.
+The snippet is our _"we are here for you"_ for all those, who don't want to play with any programming languages or development but want to have all the Sheetsu super powers on their websites.
 
 Snippet allows you to interact with a Google Spreadsheet from your website with just HTML.
 
@@ -9,6 +9,9 @@ Snippet allows you to interact with a Google Spreadsheet from your website with 
 Add below code before closing `</body>` tag.
 
 `<script src="//load.sheetsu.com?i=d0c5"></script>`
+
+### Hint
+If you are using Google Analytics, add it right after the Google Analytics script.
 
 # Read data from Spreadsheet
 ```xml

@@ -40,8 +40,8 @@ sheetsu.read(sheet: "Sheet2", limit: 2)
 ```
 
 ```html
-<!-- Read first two rows from sheet "Sheet2" -->
-<div sheetsu="https://sheetsu.com/apis/v1.0/020b2c0f" sheetsu-limit="2" sheetsu-sheet="Sheet2">
+<!-- Read first two rows from sheet "Sheet1" -->
+<div sheetsu="https://sheetsu.com/apis/v1.0/020b2c0f" sheetsu-limit="2" sheetsu-sheet="Sheet1">
   <p>Name: {{name}}</p>
   <p>Score: {{score}}</p>
 </div>
@@ -65,21 +65,20 @@ An array of objects. Each object is a row from the Google Spreadsheet.
 
 ## Search spreadsheet
 ```shell
-# Get all rows where column 'id' is 'foo'
-# and column 'value' is 'bar'
-curl "https://sheetsu.com/apis/v1.0/020b2c0f/search?id=foo&foo=bar"
+# Get all rows where column 'score' is '42'
+curl "https://sheetsu.com/apis/v1.0/020b2c0f/search?score=42"
 ```
 
 ```shell
-# Get all rows where column 'First name' is 'Peter'
-# and column 'Score' is '42'
-curl "https://sheetsu.com/apis/v1.0/020b2c0f/search?First%20name=Peter&Score=42"
+# Get all rows where column 'score' is '42'
+# and column 'name' is 'Peter'
+curl "https://sheetsu.com/apis/v1.0/020b2c0f/search?score=42&name=Peter"
 ```
 
 ```shell
-# Get first two rows where column 'First name' is 'Peter',
-# column 'Score' is '42' from sheet "Sheet2"
-curl "https://sheetsu.com/apis/v1.0/020b2c0f/sheets/Sheet2/search?First%20name=Peter&Score=42&limit=2"
+# Get first two rows where column 'foo' is 'bar',
+# column 'another column' is '1' from sheet "Sheet2"
+curl "https://sheetsu.com/apis/v1.0/020b2c0f/sheets/Sheet2/search?foo=bar&another%20column=1&limit=2"
 ```
 
 ```ruby
@@ -88,24 +87,23 @@ sheetsu = Sheetsu::Client.new("020b2c0f")
 ```
 
 ```ruby
-# Get all rows where column 'id' is 'foo'
-# and column 'value' is 'bar'
-sheetsu.read(search: { id: "foo", value: "bar" })
+# Get all rows where column 'score' is '42'
+sheetsu.read(search: { score: 42 })
 ```
 
 ```ruby
-# Get all rows where column 'First name' is 'Peter'
-# and column 'Score' is '42'
-sheetsu.read(search: { "First name" => "Peter", "Score" => 42 })
+# Get all rows where column 'score' is '42'
+# and column 'name' is 'Peter'
+sheetsu.read(search: { score: 42, name: "Peter" })
 ```
 
 ```ruby
-# Get first two rows where column 'First name' is 'Peter',
-# column 'Score' is '42' from sheet "Sheet2"
+# Get first two rows where column 'foo' is 'bar',
+# column 'another column' is '1' from sheet "Sheet2"
 sheetsu.read(
   # search criteria
-  search: { "First name" => "Peter", "Score" => 42 }
-  limit: 2        # first two rows
+  search: { "foo" => "bar", "another column" => "1" },
+  limit: 2,       # first two rows
   sheet: "Sheet2" # Sheet name
 )
 ```
@@ -122,9 +120,9 @@ sheetsu.read(
 ```html
 <!--
   Get all records where score is 42
-  from sheet "Sheet2"
+  from sheet "Sheet1"
 -->
-<div sheetsu="https://sheetsu.com/apis/v1.0/020b2c0f" sheetsu-search='{"score": "42"}' sheetsu-sheet="Sheet2">
+<div sheetsu="https://sheetsu.com/apis/v1.0/020b2c0f" sheetsu-search='{"score": "42"}' sheetsu-sheet="Sheet1">
   <p>Name: {{name}}, score: {{score}}</p>
 </div>
 
@@ -169,11 +167,11 @@ curl "https://sheetsu.com/apis/v1.0/020b2c0f" \
 ```
 
 ```shell
-# Adds single row to sheet "Sheet2"
+# Adds single row to sheet named "Sheet2"
 curl "https://sheetsu.com/apis/v1.0/020b2c0f/sheets/Sheet2" \
 -X POST \
 -H "Content-Type: application/json" \
--d '{ "foo": "bar", "baz": "quux" } }'
+-d '{ "foo": "6", "another column": "quux" }'
 ```
 
 ```ruby
@@ -183,7 +181,7 @@ sheetsu = Sheetsu::Client.new("020b2c0f")
 
 ```ruby
 # Adds single row to spreadsheet
-client.create({ id: 7, name: "Glenn", score: "69" })
+sheetsu.create({ id: 7, name: "Glenn", score: "69" })
 ```
 
 ```ruby
@@ -193,12 +191,12 @@ rows = [
   { id: 8, name: "Brian", score: "77" },
   { id: 9, name: "Joe", score: "45" }
 ]
-client.create(rows)
+sheetsu.create(rows)
 ```
 
 ```ruby
 # Adds single row to sheet named "Sheet2"
-client.create({ "foo" => "bar", "baz" => "quux" }, "Sheet2")
+sheetsu.create({ "foo" => "bar", "another column" => "quux" }, "Sheet2")
 ```
 
 ```html
@@ -221,9 +219,9 @@ client.create({ "foo" => "bar", "baz" => "quux" }, "Sheet2")
 <!--
   Display form, which will
   save record to the Google Spreadsheet
-  to sheet "Sheet2"
+  to sheet "Sheet1"
 -->
-<form sheetsu="https://sheetsu.com/apis/v1.0/1c3c0ff33" sheetsu-sheet="Sheet2">
+<form sheetsu="https://sheetsu.com/apis/v1.0/1c3c0ff33" sheetsu-sheet="Sheet1">
   <input type="text" name="full_name">
   <input type="text" name="email">
   <textarea name="message"></textarea>
@@ -268,7 +266,7 @@ curl "https://sheetsu.com/apis/v1.0/020b2c0f/name/Lois" \
 curl "https://sheetsu.com/apis/v1.0/020b2c0f/sheets/Sheet2/foo/bar" \
 -X PATCH \
 -H "Content-Type: application/json" \
--d '{ "baz": "quux" }'
+-d '{ "another column": "quux" }'
 ```
 
 ```ruby
@@ -279,7 +277,7 @@ sheetsu = Sheetsu::Client.new("020b2c0f")
 ```ruby
 # Update all rows where value of column name is Peter
 # Update only score column
-client.update(
+sheetsu.update(
   "name",          # column name
   "Peter",         # value to search for
   { score: 1337 }, # hash with updates
@@ -289,7 +287,7 @@ client.update(
 ```ruby
 # Update all rows where value of column name is Lois
 # Update whole row
-client.update(
+sheetsu.update(
   "name", # column name
   "Lois", # value to search for
    # hash with updates
@@ -304,11 +302,11 @@ client.update(
 # Update only baz colum
 # Empty all cells which are not 'score' or 'last name'
 # (in other words, send PUT)
-client.update(
+sheetsu.update(
   "foo", # column name
   "bar", # value to search for
   # hash with updates
-  { "baz" => "quux" },
+  { "another column" => "quux" },
   false, # update only passed columns
   "Sheet2"
 )

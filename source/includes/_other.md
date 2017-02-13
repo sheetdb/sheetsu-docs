@@ -3,14 +3,31 @@
 
 # Multiple sheets
 ```shell
+# Get whole spreadsheet from sheet named Sheet2
 curl "https://sheetsu.com/apis/v1.0/020b2c0f/sheets/Sheet2"
+```
+
+```shell
+# Adds single row to sheet named "Sheet2"
+curl "https://sheetsu.com/apis/v1.0/020b2c0f/sheets/Sheet2" \
+-X POST \
+-H "Content-Type: application/json" \
+-d '{ "foo": "6", "another column": "quux" }'
 ```
 
 ```ruby
 require 'sheetsu'
-
 sheetsu = Sheetsu::Client.new("020b2c0f")
+```
+
+```ruby
+# Get whole spreadsheet from sheet named Sheet2
 sheetsu.read(sheet: "Sheet2")
+```
+
+```ruby
+# Adds single row to sheet named "Sheet2"
+sheetsu.create({ "foo" => "bar", "another column" => "quux" }, "Sheet2")
 ```
 
 By default, always the first sheet (aka worksheet aka tab) is accessed. To access other sheets within a spreadsheet add `/sheets/{sheet_name}` path to the URL if using cURL, or pass appropriate param when using a lib.
