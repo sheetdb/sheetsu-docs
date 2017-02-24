@@ -18,7 +18,9 @@ Every spreadsheet should have the first row populated with column names. There a
 
 Column names can be anything. Strings, numbers, symbols, emojis 🙉 , anything.
 
-You can [check example spreadsheet here](https://docs.google.com/spreadsheets/d/1WTwXrh2ZDXmXATZlQIuapdv4ldyhJGZg7LX8GlzPdZw/edit#gid=0). It looks like this:
+You can <a href="https://docs.google.com/spreadsheets/d/1WTwXrh2ZDXmXATZlQIuapdv4ldyhJGZg7LX8GlzPdZw/edit#gid=0" target="_blank">check example spreadsheet here</a>. It looks like this:
+
+![Example Spredsheet for Sheetsu.com](../images/example_spreadsheet.png)
 
 id | name | score
 ---|------|------
