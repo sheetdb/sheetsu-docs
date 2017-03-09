@@ -36,7 +36,7 @@ sheetsu.read(sheet: "Sheet2", limit: 2)
   <p>Score: {{score}}</p>
 </div>
 
-<script src="//load.sheetsu.com?i=d0c5"></script>
+<script src="//load.sheetsu.com"></script>
 ```
 
 ```html
@@ -46,7 +46,7 @@ sheetsu.read(sheet: "Sheet2", limit: 2)
   <p>Score: {{score}}</p>
 </div>
 
-<script src="//load.sheetsu.com?i=d0c5"></script>
+<script src="//load.sheetsu.com"></script>
 ```
 
 
@@ -114,7 +114,7 @@ sheetsu.read(
   <p>Name: {{name}}, score: {{score}}</p>
 </div>
 
-<script src="//load.sheetsu.com?i=d0c5"></script>
+<script src="//load.sheetsu.com"></script>
 ```
 
 ```html
@@ -126,7 +126,7 @@ sheetsu.read(
   <p>Name: {{name}}, score: {{score}}</p>
 </div>
 
-<script src="//load.sheetsu.com?i=d0c5"></script>
+<script src="//load.sheetsu.com"></script>
 ```
 
 Search Google Spreadsheet for particular records. Pass params in a `column_name=value` as params to the `GET https://sheetsu.com/apis/v1.0/{id}/search` request.
@@ -212,7 +212,7 @@ sheetsu.create({ "foo" => "bar", "another column" => "quux" }, "Sheet2")
   <input type="submit">
 </form>
 
-<script src="//load.sheetsu.com?i=d0c5"></script>
+<script src="//load.sheetsu.com"></script>
 ```
 
 ```html
@@ -229,7 +229,7 @@ sheetsu.create({ "foo" => "bar", "another column" => "quux" }, "Sheet2")
   <input type="submit">
 </form>
 
-<script src="//load.sheetsu.com?i=d0c5"></script>
+<script src="//load.sheetsu.com"></script>
 ```
 
 Add a row to Google Spreadsheet by sending a JSON object via `POST` request. 

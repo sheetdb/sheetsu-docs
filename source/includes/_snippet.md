@@ -8,7 +8,7 @@ Snippet allows you to interact with a Google Spreadsheet from your website with 
 # Installation
 Add below code before closing `</body>` tag.
 
-`<script src="//load.sheetsu.com?i=d0c5"></script>`
+`<script src="//load.sheetsu.com"></script>`
 
 ### Hint
 If you are using Google Analytics, add it right after the Google Analytics script.
@@ -35,7 +35,7 @@ If you are using Google Analytics, add it right after the Google Analytics scrip
   </tbody>
 </table>
 
-<script src="//load.sheetsu.com?i=d0c5"></script>
+<script src="//load.sheetsu.com"></script>
 ```
 
 <blockquote>
@@ -67,7 +67,7 @@ If you are using Google Analytics, add it right after the Google Analytics scrip
   </p>
 </div>
 
-<script src="//load.sheetsu.com?i=d0c5"></script>
+<script src="//load.sheetsu.com"></script>
 ```
 <blockquote>
   <p>Above HTML will produce this result:</p>
@@ -126,7 +126,7 @@ Attributes you can use to manipulate results are `sheetsu-limit` and `sheetsu-of
   <input type="submit">
 </form>
 
-<script src="//load.sheetsu.com?i=d0c5"></script>
+<script src="//load.sheetsu.com"></script>
 ```
 
 <blockquote>
