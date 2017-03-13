@@ -52,7 +52,7 @@ You can secure your API with HTTP Basic authentication. It can be turned on in t
 You have to send `api_key` and `api_secret` when you have authentication turned on.
 
 # Rate Limits
-Every API has a rate limit. You can check your rate limit for your APIs here. After hitting the limit for the particular API, you receive `429 Rate limit exceeded` status code.
+Every API has a rate limit. You can check rate limitś for APIs on the [pricing page](https://sheetus.com/pricing). After hitting the limit for the particular API, you receive `429 Rate limit exceeded` status code.
 
 # HTTP Status Codes
 Every response from the API is a JSON encoded string with a significant HTTP status code.
