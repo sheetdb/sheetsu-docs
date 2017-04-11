@@ -3,8 +3,10 @@ title: Sheetsu Documentation
 
 language_tabs:
   - shell: cURL
-  - ruby: Ruby
   - html: HTML Snippet
+  - ruby: Ruby
+  - javascript: Node
+
 
 toc_footers:
   - <a href="https://sheetsu.com/your-apis">Your APIs</a>

@@ -14,21 +14,6 @@ curl "https://sheetsu.com/apis/v1.0/020b2c0f"
 curl "https://sheetsu.com/apis/v1.0/020b2c0f/sheets/Sheet2?limit=2"
 ```
 
-```ruby
-require 'sheetsu'
-sheetsu = Sheetsu::Client.new("020b2c0f")
-```
-
-```ruby
-# Read whole spreadsheet
-sheetsu.read
-```
-
-```ruby
-# Read first two rows from sheet "Sheet2"
-sheetsu.read(sheet: "Sheet2", limit: 2)
-```
-
 ```html
 <!-- Read whole spreadsheet -->
 <div sheetsu="https://sheetsu.com/apis/v1.0/020b2c0f">
@@ -49,6 +34,44 @@ sheetsu.read(sheet: "Sheet2", limit: 2)
 <script src="//load.sheetsu.com"></script>
 ```
 
+```ruby
+require 'sheetsu'
+sheetsu = Sheetsu::Client.new("020b2c0f")
+```
+
+```ruby
+# Read whole spreadsheet
+sheetsu.read
+```
+
+```ruby
+# Read first two rows from sheet "Sheet2"
+sheetsu.read(sheet: "Sheet2", limit: 2)
+```
+
+```javascript
+var sheetsu = require('sheetsu-node')
+// import sheetsu from 'sheetsu-node' for ES6
+var client = sheetsu({ address: '020b2c0f' })
+```
+
+```javascript
+// Read whole spreadsheet
+sheetsu.read().then(function(data) {
+  console.log(data);
+}, function(err){
+  console.log(err);
+});
+```
+
+```javascript
+// Read first two rows from sheet "Sheet2"
+sheetsu.read({ limit: 2, sheet: "Sheet2" }).then(function(data) {
+  console.log(data);
+}, function(err){
+  console.log(err);
+});
+```
 
 API can return whole Google Spreadsheet via a `GET` method to `https://sheetsu.com/apis/v1.0/{id}`.
 
@@ -81,6 +104,27 @@ curl "https://sheetsu.com/apis/v1.0/020b2c0f/search?score=42&name=Peter"
 curl "https://sheetsu.com/apis/v1.0/020b2c0f/sheets/Sheet2/search?foo=bar&another%20column=1&limit=2"
 ```
 
+```html
+<!-- Get all records where score is 42 -->
+<div sheetsu="https://sheetsu.com/apis/v1.0/020b2c0f" sheetsu-search='{"score": "42"}'>
+  <p>Name: {{name}}, score: {{score}}</p>
+</div>
+
+<script src="//load.sheetsu.com"></script>
+```
+
+```html
+<!--
+  Get all records where score is 42
+  from sheet "Sheet1"
+-->
+<div sheetsu="https://sheetsu.com/apis/v1.0/020b2c0f" sheetsu-search='{"score": "42"}' sheetsu-sheet="Sheet1">
+  <p>Name: {{name}}, score: {{score}}</p>
+</div>
+
+<script src="//load.sheetsu.com"></script>
+```
+
 ```ruby
 require 'sheetsu'
 sheetsu = Sheetsu::Client.new("020b2c0f")
@@ -108,25 +152,45 @@ sheetsu.read(
 )
 ```
 
-```html
-<!-- Get all records where score is 42 -->
-<div sheetsu="https://sheetsu.com/apis/v1.0/020b2c0f" sheetsu-search='{"score": "42"}'>
-  <p>Name: {{name}}, score: {{score}}</p>
-</div>
-
-<script src="//load.sheetsu.com"></script>
+```javascript
+var sheetsu = require('sheetsu-node')
+// import sheetsu from 'sheetsu-node' for ES6
+var client = sheetsu({ address: '020b2c0f' })
 ```
 
-```html
-<!--
-  Get all records where score is 42
-  from sheet "Sheet1"
--->
-<div sheetsu="https://sheetsu.com/apis/v1.0/020b2c0f" sheetsu-search='{"score": "42"}' sheetsu-sheet="Sheet1">
-  <p>Name: {{name}}, score: {{score}}</p>
-</div>
+```javascript
+// Get all rows where column 'score' is '42'
+client.read({ search: { score: 42 } }).then(function(data) {
+  console.log(data);
+}, function(err){
+  console.log(err);
+});
+```
 
-<script src="//load.sheetsu.com"></script>
+```javascript
+// Get all rows where column 'score' is '42'
+// and column 'name' is 'Peter'
+client.read({ search: { score: 42, name: "Peter" } }).then(function(data) {
+  console.log(data);
+}, function(err){
+  console.log(err);
+});
+```
+
+```javascript
+// Get first two rows where column 'foo' is 'bar',
+// column 'another column' is '1' from sheet "Sheet2"
+client.read({
+  limit: 2, // first two rows
+  // search criteria
+  search: { "foo": "bar", "another column": "1" },
+  sheet: "Sheet2" // Sheet name
+}
+).then(function(data) {
+  console.log(data);
+}, function(err){
+  console.log(err);
+});
 ```
 
 Search Google Spreadsheet for particular records. Pass params in a `column_name=value` as params to the `GET https://sheetsu.com/apis/v1.0/{id}/search` request.
@@ -174,31 +238,6 @@ curl "https://sheetsu.com/apis/v1.0/020b2c0f/sheets/Sheet2" \
 -d '{ "foo": "6", "another column": "quux" }'
 ```
 
-```ruby
-require 'sheetsu'
-sheetsu = Sheetsu::Client.new("020b2c0f")
-```
-
-```ruby
-# Adds single row to spreadsheet
-sheetsu.create({ id: 7, name: "Glenn", score: "69" })
-```
-
-```ruby
-# Adds bunch of rows to spreadsheet
-rows = [
-  { id: 7, name: "Glenn", score: "69" },
-  { id: 8, name: "Brian", score: "77" },
-  { id: 9, name: "Joe", score: "45" }
-]
-sheetsu.create(rows)
-```
-
-```ruby
-# Adds single row to sheet named "Sheet2"
-sheetsu.create({ "foo" => "bar", "another column" => "quux" }, "Sheet2")
-```
-
 ```html
 <!--
   Display form, which will
@@ -230,6 +269,69 @@ sheetsu.create({ "foo" => "bar", "another column" => "quux" }, "Sheet2")
 </form>
 
 <script src="//load.sheetsu.com"></script>
+```
+
+```ruby
+require 'sheetsu'
+sheetsu = Sheetsu::Client.new("020b2c0f")
+```
+
+```ruby
+# Adds single row to spreadsheet
+sheetsu.create({ id: 7, name: "Glenn", score: "69" })
+```
+
+```ruby
+# Adds bunch of rows to spreadsheet
+rows = [
+  { id: 7, name: "Glenn", score: "69" },
+  { id: 8, name: "Brian", score: "77" },
+  { id: 9, name: "Joe", score: "45" }
+]
+sheetsu.create(rows)
+```
+
+```ruby
+# Adds single row to sheet named "Sheet2"
+sheetsu.create({ "foo" => "bar", "another column" => "quux" }, "Sheet2")
+```
+
+```javascript
+var sheetsu = require('sheetsu-node')
+// import sheetsu from 'sheetsu-node' for ES6
+var client = sheetsu({ address: '020b2c0f' })
+```
+
+```javascript
+// Adds single row to spreadsheet
+client.create({ id: 7, name: "Glenn", score: "69" }).then(function(data) {
+  console.log(data);
+}, function(err){
+  console.log(err);
+});
+```
+
+```javascript
+// Adds bunch of rows to spreadsheet
+var rows = [
+  { id: 7, name: "Glenn", score: "69" },
+  { id: 8, name: "Brian", score: "77" },
+  { id: 9, name: "Joe", score: "45" }
+]
+cllient.create(rows).then(function(data) {
+  console.log(data);
+}, function(err){
+  console.log(err);
+});
+```
+
+```javascript
+// Adds single row to sheet named "Sheet2"
+cllient.create({ "foo": "bar", "another column": "quux" }, "Sheet2").then(function(data) {
+  console.log(data);
+}, function(err){
+  console.log(err);
+});
 ```
 
 Add a row to Google Spreadsheet by sending a JSON object via `POST` request. 
@@ -312,6 +414,62 @@ sheetsu.update(
 )
 ```
 
+```javascript
+var sheetsu = require('sheetsu-node')
+// import sheetsu from 'sheetsu-node' for ES6
+var client = sheetsu({ address: '020b2c0f' })
+```
+
+```javascript
+// Update all rows where value of column name is Peter
+// Update only score column
+client.update(
+  "name",          // column name
+  "Peter",         // value to search for
+  { score: 1337 } // hash with updates
+).then(function(data) {
+  console.log(data);
+}, function(err){
+  console.log(err);
+});
+```
+
+```javascript
+// Update all rows where value of column name is Lois
+// Update whole row
+client.update(
+  "name", // column name
+  "Lois", // value to search for
+   // hash with updates
+  { "id": 2, "name": "Loo1z", "score": 99999 },
+  true // nullify all fields not passed in the hash above
+).then(function(data) {
+  console.log(data);
+}, function(err){
+  console.log(err);
+});
+```
+
+```javascript
+// Update all rows from sheet "Sheet2"
+// where value of column foo is bar
+// Update only baz colum
+// Empty all cells which are not 'score' or 'last name'
+// (in other words, send PUT)
+client.update(
+  "foo", // column name
+  "bar", // value to search for
+  // hash with updates
+  { "another column": "quux" },
+  false, // update only passed columns
+  "Sheet2"
+).then(function(data) {
+  console.log(data);
+}, function(err){
+  console.log(err);
+});
+```
+
 Send `PATCH` (or `PUT`) request to update value(s) of a row(s). To identify the row(s) you want to update you need to add `/{column_name}/{value}` to the API URL. Then you need to pass JSON object with new values. Updates only rows where `{column_name}` match `{value}`.
 
 ### Difference between `PUT` and `PATCH`
@@ -356,6 +514,38 @@ sheetsu.delete(
   "bar",   # value to search for
   "Sheet2" # sheet name
 )
+```
+
+```javascript
+var sheetsu = require('sheetsu-node')
+// import sheetsu from 'sheetsu-node' for ES6
+var client = sheetsu({ address: '020b2c0f' })
+```
+
+```javascript
+// Delete all rows where value of column name is Lois
+client.delete(
+  "name", // column name
+  "Lois" // value to search for
+).then(function(data) {
+  console.log(data);
+}, function(err){
+  console.log(err);
+});
+```
+
+```javascript
+// Delete rows from sheet "Sheet2"
+// where value of column foo is bar
+client.delete(
+  "foo",   // column name
+  "bar",   // value to search for
+  "Sheet2" // sheet name
+).then(function(data) {
+  console.log(data);
+}, function(err){
+  console.log(err);
+});
 ```
 
 Send DELETE request with a `/{column_name}/{value}` path added at the end of the URL to delete row(s). Deletes row(s) where `{column_name}` match `{value}`.
