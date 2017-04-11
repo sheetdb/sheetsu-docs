@@ -8,9 +8,14 @@ You can view code examples in the area on the right. You can switch the programm
 Follow <a href="https://twitter.com/sheetsuhq" target="_blank">@sheetsuhq</a> on Twitter for latest updates and news.
 
 # SDKs & Client libraries
-Official libraries for the Sheetsu API are available in Ruby.
+
+### Official libraries
 
 * Ruby: [https://github.com/sheetsu/sheetsu-ruby](https://github.com/sheetsu/sheetsu-ruby)
+
+### Community libraries
+
+* PHP: [https://github.com/emilianozublena/sheetsu-php](https://github.com/emilianozublena/sheetsu-php)
 
 # How to prepare spreadsheet
 
