@@ -104,6 +104,16 @@ curl "https://sheetsu.com/apis/v1.0/020b2c0f/search?score=42&name=Peter"
 curl "https://sheetsu.com/apis/v1.0/020b2c0f/sheets/Sheet2/search?foo=bar&another%20column=1&limit=2"
 ```
 
+```shell
+# Get all rows where column 'name' is starting with 'p'
+curl "https://sheetsu.com/apis/v1.0/020b2c0f/search?name=p*&ignore_case=true"
+```
+
+```shell
+# Get all rows where column 'name' is contains string 'oi'
+curl "https://sheetsu.com/apis/v1.0/020b2c0f/search?name=*oi*"
+```
+
 ```html
 <!-- Get all records where score is 42 -->
 <div sheetsu="https://sheetsu.com/apis/v1.0/020b2c0f" sheetsu-search='{"score": "42"}'>
@@ -195,6 +205,9 @@ client.read({
 
 Search Google Spreadsheet for particular records. Pass params in a `column_name=value` as params to the `GET https://sheetsu.com/apis/v1.0/{id}/search` request.
 
+### Wildcard searching
+You can search using wildcards (`*`). Asteriks (`*`) can represent any characters or empty string.
+
 ### Request Parameters
 You can optionally limit results, or start with offset.
 
@@ -202,6 +215,7 @@ Parameter | Description
 ----------|------------
 limit | Number of how many rows should be returned
 offset | Number from which row response should start (default is 0)
+ignore_case | Ignore letter case sensitivity. Both column names and values
 
 
 ### Returns
