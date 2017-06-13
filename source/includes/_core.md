@@ -332,7 +332,7 @@ var rows = [
   { id: 8, name: "Brian", score: "77" },
   { id: 9, name: "Joe", score: "45" }
 ]
-cllient.create(rows).then(function(data) {
+client.create(rows).then(function(data) {
   console.log(data);
 }, function(err){
   console.log(err);
@@ -341,7 +341,7 @@ cllient.create(rows).then(function(data) {
 
 ```javascript
 // Adds single row to sheet named "Sheet2"
-cllient.create({ "foo": "bar", "another column": "quux" }, "Sheet2").then(function(data) {
+client.create({ "foo": "bar", "another column": "quux" }, "Sheet2").then(function(data) {
   console.log(data);
 }, function(err){
   console.log(err);
