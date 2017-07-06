@@ -700,7 +700,7 @@ html, body {
     }
   }
 
-  .button-wrapper {    
+  .button-wrapper {
     .button {
       background-color: #4487E9;
       border: 2px solid #4487E9;
@@ -726,4 +726,37 @@ h1#introduction, h1#core, h1#snippet, h1#other {
 .logo__holder {
   display: block;
   max-width: 100%;
+}
+.button__wrapper {
+  margin: 20px 10px;
+}
+
+.button {
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
+  white-space: nowrap;
+  letter-spacing: 1.4px;
+  text-align: center;
+  text-shadow: none;
+  text-transform: uppercase;
+  overflow: hidden;
+  text-decoration: none;
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  line-height: 12px;
+  padding: 15px 0;
+}
+
+.button--sign-up {
+  background: rgb(88, 191, 131) !important;
+  color: rgb(255, 255, 255);
+  border-width: initial;
+  border-style: none;
+  border-color: initial;
+  border-image: initial;
+  border-radius: 3px;
+  transition: all 0.4s ease;
+  font: 700 12px "Open Sans", sans-serif;
 }

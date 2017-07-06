@@ -28,7 +28,7 @@ under the License.
     <%= stylesheet_link_tag :screen, media: :screen %>
     <%= stylesheet_link_tag :print, media: :print %>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-    
+
     <% if current_page.data.search %>
       <%= javascript_include_tag  "all" %>
     <% else %>
@@ -69,6 +69,9 @@ under the License.
     </a>
     <div class="tocify-wrapper">
       <a href="https://www.sheetsu.com"><%= image_tag "logo.png", class: "logo__holder" %></a>
+      <div class="button__wrapper">
+        <a class="button button--sign-up" href="//sheetsu.com/users/auth/google_oauth2">Sign up</a>
+      </div>
       <% if language_tabs.any? %>
         <div class="lang-selector">
           <% language_tabs.each do |lang| %>
