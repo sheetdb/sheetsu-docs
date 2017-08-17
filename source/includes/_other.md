@@ -51,6 +51,21 @@ You can secure your API with HTTP Basic authentication. It can be turned on in t
 
 You have to send `api_key` and `api_secret` when you have authentication turned on.
 
+# Creating API programmatically
+
+```cURL
+# Creates new API
+curl "https://sheetsu.com/apis/v1.0/api_sheets" \
+-X POST \
+-H "Content-Type: application/json" \
+-d '{ "email": "your@email.com", "api_key": "api_key", "google_spreadsheet_url": "your_doc_url" }'
+```
+
+API can be created by sending `POST` request to `https://sheetsu.com/apis/v1.0/api_sheets`. This feature is not available in all plans - check [pricing page](https://sheetsu.com/pricing) to know more.
+Please contact
+<a href="#creating-api-programmatically" onclick='Intercom("showNewMessage", "Hello there! 👋 I need my api_key so I could create my API programmatically")'>support</a>
+ to get your `api_key`.
+
 # Rate Limits
 Every API has a rate limit. You can check rate limitś for APIs on the [pricing page](https://sheetsu.com/pricing). After hitting the limit for the particular API, you receive `429 Rate limit exceeded` status code.
 
@@ -68,6 +83,6 @@ Code | Description
 `403 Forbidden` | Error response when action is forbidden by the user (API owner)
 `404 No such route` | Error response when route doesn't exist
 `429 Rate limit exceeded` | Error response when API hits quota exceeded
-`500 Server error` | 
+`500 Server error` |
 
 Each API URL has an `id`, which identifies it. It is part of the URL which is after `https://sheetsu.com/apis/v1.0/`.
