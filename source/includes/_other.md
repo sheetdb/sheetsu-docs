@@ -53,7 +53,7 @@ You have to send `api_key` and `api_secret` when you have authentication turned 
 
 # Creating API programmatically
 
-```cURL
+```shell
 # Creates new API
 curl "https://sheetsu.com/apis/v1.0/api_sheets" \
 -X POST \
