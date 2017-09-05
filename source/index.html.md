@@ -6,7 +6,8 @@ language_tabs:
   - xml: HTML Snippet
   - ruby: Ruby
   - javascript: Node
-  - html: JS Web Client
+  - html: JavaScript Web Client
+  - python: Python
 
 toc_footers:
   - <a href="https://sheetsu.com/your-apis">Dashboard</a>

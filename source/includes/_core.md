@@ -73,6 +73,7 @@ sheetsu.read({ limit: 2, sheet: "Sheet2" }).then(function(data) {
 });
 ```
 
+
 ```html
 <head>
   <script src="//script.sheetsu.com/"></script>
@@ -85,6 +86,16 @@ sheetsu.read({ limit: 2, sheet: "Sheet2" }).then(function(data) {
     Sheetsu.read("https://sheetsu.com/apis/v1.0/020b2c0f/", {}, successFunc);
   </script>
 </body>
+```
+
+```python
+from sheetsu import SheetsuClient
+client = SheetsuClient("020b2c0f")
+```
+
+```python
+# Read first two rows from sheet "Sheet2"
+client.read(sheet="Sheet2", limit=2)
 ```
 
 API can return whole Google Spreadsheet via a `GET` method to `https://sheetsu.com/apis/v1.0/{id}`.
@@ -235,6 +246,33 @@ client.read({
     }, successFunc);
   </script>
 </body>
+```
+
+```python
+from sheetsu import SheetsuClient
+client = SheetsuClient("020b2c0f")
+```
+
+```python
+# Get all rows where column 'score' is '42'
+client.search(score="42")
+```
+
+```python
+# Get all rows where column 'score' is '42'
+# and column 'name' is 'Peter'
+client.search(score="42", name="Peter")
+```
+
+```python
+# Get first two rows where column 'foo' is 'bar'
+# from sheet "Sheet2"
+client.search(sheet="Sheet2", foo="bar", limit=2)
+```
+
+```python
+# Get all rows where column 'name' is contains string 'oi'
+client.search(name="*oi*")
 ```
 
 Search Google Spreadsheet for particular records. Pass params in a `column_name=value` as params to the `GET https://sheetsu.com/apis/v1.0/{id}/search` request.
@@ -412,6 +450,32 @@ client.create({ "foo": "bar", "another column": "quux" }, "Sheet2").then(functio
 </body>
 ```
 
+```python
+from sheetsu import SheetsuClient
+client = SheetsuClient("020b2c0f")
+```
+
+```python
+# Adds single row to spreadsheet
+client.create_one(id="7", name="Glenn", score="96")
+```
+
+```python
+# Adds single row to spreadsheet to sheet named "Sheet2"
+client.create_one(sheet="Sheet2", foo="quux")
+```
+
+```python
+# Adds bunch of rows to spreadsheet to sheet named "Sheet1"
+client.create_many(
+  sheet="Sheet1",
+  *[
+    dict(id="8", name="Brian", score="42"),
+    dict(id="9", name="Joe", score="201")
+  ]
+)
+```
+
 Add a row to Google Spreadsheet by sending a JSON object via `POST` request.
 
 ### Multiple rows
@@ -548,6 +612,23 @@ client.update(
 });
 ```
 
+```python
+from sheetsu import SheetsuClient
+client = SheetsuClient("020b2c0f")
+```
+
+```python
+# Update all rows where value of column name is Peter
+# Update only score column
+client.update(column="name", value="Peter", data=dict(score=120)))
+```
+
+```python
+# Update all rows where value of column name is Peter
+# Update only score column
+client.update(column="name", value="Peter", data=dict(score=120)))
+```
+
 Send `PATCH` (or `PUT`) request to update value(s) of a row(s). To identify the row(s) you want to update you need to add `/{column_name}/{value}` to the API URL. Then you need to pass JSON object with new values. Updates only rows where `{column_name}` match `{value}`.
 
 ### Difference between `PUT` and `PATCH`
@@ -624,6 +705,22 @@ client.delete(
 }, function(err){
   console.log(err);
 });
+```
+
+```python
+from sheetsu import SheetsuClient
+client = SheetsuClient("020b2c0f")
+```
+
+```python
+# Delete all rows where value of column name is Peter
+client.delete(column="name", value="Peter")
+```
+
+```python
+# Delete all rows from sheet named Sheet1
+# where value of column name is Meg
+client.delete(sheet="Sheet1", column="name", value="Meg")
 ```
 
 Send DELETE request with a `/{column_name}/{value}` path added at the end of the URL to delete row(s). Deletes row(s) where `{column_name}` match `{value}`.
