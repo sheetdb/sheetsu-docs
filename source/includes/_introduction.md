@@ -17,6 +17,7 @@ Follow <a href="https://twitter.com/sheetsuhq" target="_blank">@sheetsuhq</a> on
 ### Community libraries
 
 * PHP: [https://github.com/emilianozublena/sheetsu-php](https://github.com/emilianozublena/sheetsu-php)
+* Python: [https://github.com/andreffs18/sheetsu-python](https://github.com/andreffs18/sheetsu-python)
 
 # How to prepare spreadsheet
 

@@ -6,6 +6,7 @@ language_tabs:
   - html: HTML Snippet
   - ruby: Ruby
   - javascript: Node
+  - python: Python
 
 
 toc_footers:
