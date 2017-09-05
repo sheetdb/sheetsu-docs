@@ -14,7 +14,7 @@ curl "https://sheetsu.com/apis/v1.0/020b2c0f"
 curl "https://sheetsu.com/apis/v1.0/020b2c0f/sheets/Sheet2?limit=2"
 ```
 
-```html
+```xml
 <!-- Read whole spreadsheet -->
 <div sheetsu="https://sheetsu.com/apis/v1.0/020b2c0f">
   <p>Name: {{name}}</p>
@@ -24,7 +24,7 @@ curl "https://sheetsu.com/apis/v1.0/020b2c0f/sheets/Sheet2?limit=2"
 <script src="//load.sheetsu.com"></script>
 ```
 
-```html
+```xml
 <!-- Read first two rows from sheet "Sheet1" -->
 <div sheetsu="https://sheetsu.com/apis/v1.0/020b2c0f" sheetsu-limit="2" sheetsu-sheet="Sheet1">
   <p>Name: {{name}}</p>
@@ -71,6 +71,21 @@ sheetsu.read({ limit: 2, sheet: "Sheet2" }).then(function(data) {
 }, function(err){
   console.log(err);
 });
+```
+
+
+```html
+<head>
+  <script src="//script.sheetsu.com/"></script>
+</head>
+<body>
+  <script>
+    function successFunc(data) {
+      console.log(data);
+    }
+    Sheetsu.read("https://sheetsu.com/apis/v1.0/020b2c0f/", {}, successFunc);
+  </script>
+</body>
 ```
 
 ```python
@@ -124,7 +139,7 @@ curl "https://sheetsu.com/apis/v1.0/020b2c0f/search?name=p*&ignore_case=true"
 curl "https://sheetsu.com/apis/v1.0/020b2c0f/search?name=*oi*"
 ```
 
-```html
+```xml
 <!-- Get all records where score is 42 -->
 <div sheetsu="https://sheetsu.com/apis/v1.0/020b2c0f" sheetsu-search='{"score": "42"}'>
   <p>Name: {{name}}, score: {{score}}</p>
@@ -133,7 +148,7 @@ curl "https://sheetsu.com/apis/v1.0/020b2c0f/search?name=*oi*"
 <script src="//load.sheetsu.com"></script>
 ```
 
-```html
+```xml
 <!--
   Get all records where score is 42
   from sheet "Sheet1"
@@ -213,6 +228,26 @@ client.read({
 });
 ```
 
+```html
+<head>
+  <script src="//script.sheetsu.com/"></script>
+</head>
+<body>
+  <script>
+    function successFunc(data) {
+      console.log(data);
+    }
+    // Get all rows where column 'score' is '42'
+    var searchQuery = {
+      score: 42,
+    };
+    Sheetsu.read("https://sheetsu.com/apis/v1.0/020b2c0f/", {
+      search: searchQuery
+    }, successFunc);
+  </script>
+</body>
+```
+
 ```python
 from sheetsu import SheetsuClient
 client = SheetsuClient("020b2c0f")
@@ -239,7 +274,6 @@ client.search(sheet="Sheet2", foo="bar", limit=2)
 # Get all rows where column 'name' is contains string 'oi'
 client.search(name="*oi*")
 ```
-
 
 Search Google Spreadsheet for particular records. Pass params in a `column_name=value` as params to the `GET https://sheetsu.com/apis/v1.0/{id}/search` request.
 
@@ -290,7 +324,7 @@ curl "https://sheetsu.com/apis/v1.0/020b2c0f/sheets/Sheet2" \
 -d '{ "foo": "6", "another column": "quux" }'
 ```
 
-```html
+```xml
 <!--
   Display form, which will
   save record to the Google Spreadsheet
@@ -306,7 +340,7 @@ curl "https://sheetsu.com/apis/v1.0/020b2c0f/sheets/Sheet2" \
 <script src="//load.sheetsu.com"></script>
 ```
 
-```html
+```xml
 <!--
   Display form, which will
   save record to the Google Spreadsheet
@@ -386,6 +420,36 @@ client.create({ "foo": "bar", "another column": "quux" }, "Sheet2").then(functio
 });
 ```
 
+```html
+<head>
+  <script src="//script.sheetsu.com/"></script>
+</head>
+<body>
+  <form id="myForm">
+    <input type="text" name="first_name">
+    <input type="text" name="score">
+    <button type="submit">Save</button>
+  </form>
+  <script>
+    document.querySelector("#myForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      saveData();
+    });
+    function saveData() {
+      var first_name = document.getElementsByName("first_name")[0].value,
+        score = document.getElementsByName("score")[0].value;
+      var data = {
+        name: first_name,
+        score: score
+      };
+      Sheetsu.write("https://sheetsu.com/apis/v1.0/020b2c0f/", data, {}, function (result) {
+        console.log(result);
+      });
+    }
+  </script>
+</body>
+```
+
 ```python
 from sheetsu import SheetsuClient
 client = SheetsuClient("020b2c0f")
@@ -411,8 +475,6 @@ client.create_many(
   ]
 )
 ```
-
-
 
 Add a row to Google Spreadsheet by sending a JSON object via `POST` request.
 
