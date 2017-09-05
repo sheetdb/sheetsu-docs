@@ -13,6 +13,7 @@ Follow <a href="https://twitter.com/sheetsuhq" target="_blank">@sheetsuhq</a> on
 
 * Ruby: [https://github.com/sheetsu/sheetsu-ruby](https://github.com/sheetsu/sheetsu-ruby)
 * Node: [https://github.com/sheetsu/sheetsu-node](https://github.com/sheetsu/sheetsu-node)
+* Sheetsu Web Client: [https://github.com/sheetsu/sheetsu-web-client](https://github.com/sheetsu/sheetsu-web-client)
 
 ### Community libraries
 

@@ -3,10 +3,10 @@ title: Sheetsu Documentation
 
 language_tabs:
   - shell: cURL
-  - html: HTML Snippet
+  - xml: HTML Snippet
   - ruby: Ruby
   - javascript: Node
-
+  - html: JS Web Client
 
 toc_footers:
   - <a href="https://sheetsu.com/your-apis">Dashboard</a>
