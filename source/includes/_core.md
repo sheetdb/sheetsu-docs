@@ -639,14 +639,16 @@ Send `PATCH` (or `PUT`) request to update value(s) of a row(s). To identify the 
 An array of updated objects. If a request is sent via `PATCH` method returns only updated values. If a request is sent via `PUT` method returns only updated values.
 
 # DELETE
+
+## Clear
 ```shell
-# Deletes all rows where name is Lois
+# Clear all rows where name is Lois
 curl "https://sheetsu.com/apis/v1.0/020b2c0f/name/Lois" \
 -X DELETE
 ```
 
 ```shell
-# Delete all rows from sheet "Sheet2"
+# Clear all rows from sheet "Sheet2"
 # where value of column foo is bar
 curl "https://sheetsu.com/apis/v1.0/020b2c0f/sheets/Sheet2/foo/bar" \
 -X DELETE
@@ -658,7 +660,7 @@ sheetsu = Sheetsu::Client.new("020b2c0f")
 ```
 
 ```ruby
-# Delete all rows where value of column name is Lois
+# Clear all rows where value of column name is Lois
 sheetsu.delete(
   "name", # column name
   "Lois", # value to search for
@@ -666,7 +668,7 @@ sheetsu.delete(
 ```
 
 ```ruby
-# Delete rows from sheet "Sheet2"
+# Clear rows from sheet "Sheet2"
 # where value of column foo is bar
 sheetsu.delete(
   "foo",   # column name
@@ -682,7 +684,7 @@ var client = sheetsu({ address: '020b2c0f' })
 ```
 
 ```javascript
-// Delete all rows where value of column name is Lois
+// Clear all rows where value of column name is Lois
 client.delete(
   "name", // column name
   "Lois" // value to search for
@@ -694,7 +696,7 @@ client.delete(
 ```
 
 ```javascript
-// Delete rows from sheet "Sheet2"
+// Clear rows from sheet "Sheet2"
 // where value of column foo is bar
 client.delete(
   "foo",   // column name
@@ -713,17 +715,77 @@ client = SheetsuClient("020b2c0f")
 ```
 
 ```python
-# Delete all rows where value of column name is Peter
+# Clear all rows where value of column name is Peter
 client.delete(column="name", value="Peter")
 ```
 
 ```python
-# Delete all rows from sheet named Sheet1
+# Clear all rows from sheet named Sheet1
 # where value of column name is Meg
 client.delete(sheet="Sheet1", column="name", value="Meg")
 ```
 
-Send DELETE request with a `/{column_name}/{value}` path added at the end of the URL to delete row(s). Deletes row(s) where `{column_name}` match `{value}`.
+Send DELETE request with a `/{column_name}/{value}` path added at the end of the URL to delete row(s). Clear row(s) where `{column_name}` match `{value}`. Clear doesn't change the number of rows.
 
 ### Returns
 On success, returns `204 No Content` HTTP status code, without a body.
+
+## Destroy
+
+```shell
+# Destroy all rows where column 'name' is 'Lois'
+curl "https://sheetsu.com/apis/v1.0/020b2c0f" \
+-X DELETE \
+-H "Content-Type: application/json" \
+-d '{ "name": "Lois" }'
+```
+
+```shell
+# Destroy all rows where column 'score' is '42'
+# and column 'name' is 'Peter'
+curl "https://sheetsu.com/apis/v1.0/020b2c0f" \
+-X DELETE \
+-H "Content-Type: application/json" \
+-d '{ "score": "42", "name": "Peter" }'
+```
+
+```shell
+# Destroy all rows from sheet 'Sheet2'
+# where column 'score' is '42' and column 'name' is 'Peter'
+curl "https://sheetsu.com/apis/v1.0/020b2c0f/sheets/Sheet2" \
+-X DELETE \
+-H "Content-Type: application/json" \
+-d '{ "score": "42", "name": "Peter" }'
+```
+
+```shell
+# Destroy all rows where column 'name' is starting with 'p' or 'P'
+curl "https://sheetsu.com/apis/v1.0/020b2c0f" \
+-X DELETE \
+-H "Content-Type: application/json" \
+-d '{ "name": "p*", "ignore_case": "true" }'
+```
+
+```shell
+# Destroy all rows where column 'name' contains string 'oi'
+curl "https://sheetsu.com/apis/v1.0/020b2c0f" \
+-X DELETE \
+-H "Content-Type: application/json" \
+-d '{ "name": "*oi*" }'
+```
+
+Send DELETE request to destroy all matched rows, move up below rows and decrease number of rows. Pass params in a `column_name=value` as params to the request.
+
+### Wildcard matching
+
+You can match rows to destroy using wildcards (`*`). Asteriks (`*`) can represent any characters or empty string.
+
+### Request Parameters
+You can optionally ignore letter case sensitivity.
+
+Parameter | Description
+----------|------------
+ignore_case | Ignore letter case sensitivity. Both column names and values
+
+### Returns
+On success, returns `200 OK` HTTP status code, with all destroyed rows at body.
