@@ -49,24 +49,24 @@ sheetsu.read
 sheetsu.read(sheet: "Sheet2", limit: 2)
 ```
 
-```javascript
+```javascript--node
 var sheetsu = require('sheetsu-node')
 // import sheetsu from 'sheetsu-node' for ES6
 var client = sheetsu({ address: '020b2c0f' })
 ```
 
-```javascript
+```javascript--node
 // Read whole spreadsheet
-sheetsu.read().then(function(data) {
+client.read().then(function(data) {
   console.log(data);
 }, function(err){
   console.log(err);
 });
 ```
 
-```javascript
+```javascript--node
 // Read first two rows from sheet "Sheet2"
-sheetsu.read({ limit: 2, sheet: "Sheet2" }).then(function(data) {
+client.read({ limit: 2, sheet: "Sheet2" }).then(function(data) {
   console.log(data);
 }, function(err){
   console.log(err);
@@ -96,6 +96,29 @@ client = SheetsuClient("020b2c0f")
 ```python
 # Read first two rows from sheet "Sheet2"
 client.read(sheet="Sheet2", limit=2)
+```
+
+```php
+<?php
+
+require('vendor/autoload.php');
+use Sheetsu\Sheetsu;
+
+$sheetsu = new Sheetsu([
+    'sheetId' => '020b2c0f'
+]);
+
+
+// Read whole spreadsheet
+$response = $sheetsu->read();
+$collection = $response->getCollection();
+
+
+// Read first two rows from sheet "Sheet2"
+$response = $sheetsu->sheet('Sheet2')->read(2, 0);
+$collection = $response->getCollection();
+
+?>
 ```
 
 API can return whole Google Spreadsheet via a `GET` method to `https://sheetsu.com/apis/v1.0/{id}`.
@@ -187,13 +210,13 @@ sheetsu.read(
 )
 ```
 
-```javascript
+```javascript--node
 var sheetsu = require('sheetsu-node')
 // import sheetsu from 'sheetsu-node' for ES6
 var client = sheetsu({ address: '020b2c0f' })
 ```
 
-```javascript
+```javascript--node
 // Get all rows where column 'score' is '42'
 client.read({ search: { score: 42 } }).then(function(data) {
   console.log(data);
@@ -202,7 +225,7 @@ client.read({ search: { score: 42 } }).then(function(data) {
 });
 ```
 
-```javascript
+```javascript--node
 // Get all rows where column 'score' is '42'
 // and column 'name' is 'Peter'
 client.read({ search: { score: 42, name: "Peter" } }).then(function(data) {
@@ -212,7 +235,7 @@ client.read({ search: { score: 42, name: "Peter" } }).then(function(data) {
 });
 ```
 
-```javascript
+```javascript--node
 // Get first two rows where column 'foo' is 'bar',
 // column 'another column' is '1' from sheet "Sheet2"
 client.read({
@@ -274,6 +297,53 @@ client.search(sheet="Sheet2", foo="bar", limit=2)
 # Get all rows where column 'name' is contains string 'oi'
 client.search(name="*oi*")
 ```
+
+```php
+<?php
+
+require('vendor/autoload.php');
+use Sheetsu\Sheetsu;
+
+$sheetsu = new Sheetsu([
+    'sheetId' => '020b2c0f'
+]);
+
+
+// Get all rows where column 'score' is '42'
+$response = $sheetsu->search([
+    'score' => '42'
+]);
+$collection = $response->getCollection();
+
+
+// Get all rows where column 'score' is '42'
+// and column 'name' is 'Peter'
+$response = $sheetsu->search([
+    'name' => 'Peter',
+    'score'      => '42'
+]);
+$collection = $response->getCollection();
+
+
+// Get first two rows where column 'foo' is 'bar'
+// from sheet "Sheet2"
+$response = $sheetsu->sheet('Sheet2')->search([
+    'foo' => 'bar',
+], 2, 0);
+$collection = $response->getCollection();
+
+
+// Get all rows where column 'name' is contains string 'oi'
+$response = $sheetsu->search([
+    'name' => '*oi*',
+]);
+$collection = $response->getCollection();
+
+?>
+```
+
+
+
 
 Search Google Spreadsheet for particular records. Pass params in a `column_name=value` as params to the `GET https://sheetsu.com/apis/v1.0/{id}/search` request.
 
@@ -382,13 +452,13 @@ sheetsu.create(rows)
 sheetsu.create({ "foo" => "bar", "another column" => "quux" }, "Sheet2")
 ```
 
-```javascript
+```javascript--node
 var sheetsu = require('sheetsu-node')
 // import sheetsu from 'sheetsu-node' for ES6
 var client = sheetsu({ address: '020b2c0f' })
 ```
 
-```javascript
+```javascript--node
 // Adds single row to spreadsheet
 client.create({ id: 7, name: "Glenn", score: "69" }).then(function(data) {
   console.log(data);
@@ -397,7 +467,7 @@ client.create({ id: 7, name: "Glenn", score: "69" }).then(function(data) {
 });
 ```
 
-```javascript
+```javascript--node
 // Adds bunch of rows to spreadsheet
 var rows = [
   { id: 7, name: "Glenn", score: "69" },
@@ -411,7 +481,7 @@ client.create(rows).then(function(data) {
 });
 ```
 
-```javascript
+```javascript--node
 // Adds single row to sheet named "Sheet2"
 client.create({ "foo": "bar", "another column": "quux" }, "Sheet2").then(function(data) {
   console.log(data);
@@ -474,6 +544,35 @@ client.create_many(
     dict(id="9", name="Joe", score="201")
   ]
 )
+```
+
+```php
+<?php
+
+require('vendor/autoload.php');
+use Sheetsu\Sheetsu;
+
+$sheetsu = new Sheetsu([
+    'sheetId' => '020b2c0f'
+]);
+
+
+// Adds single row to spreadsheet
+$sheetsu->create([['id' => '7', 'name' => 'Glenn', 'score' => 96 ]]);
+
+
+// Adds single row to spreadsheet to sheet named "Sheet2"
+$sheetsu->sheet('Sheet2')->create([['id' => '8', 'name' => 'Glenn', 'score' => 96 ]]);
+
+
+// Adds bunch of rows to spreadsheet
+$sheetsu->create([
+  [ 'id' => '7', 'name' => 'Glenn', 'score' => '69' ],
+  [ 'id' => '8', 'name' => 'Brian', 'score' => '77' ],
+  [ 'id' => '9', 'name' => 'Joe', 'score' => '45' ]
+]);
+
+?>
 ```
 
 Add a row to Google Spreadsheet by sending a JSON object via `POST` request.
@@ -556,13 +655,13 @@ sheetsu.update(
 )
 ```
 
-```javascript
+```javascript--node
 var sheetsu = require('sheetsu-node')
 // import sheetsu from 'sheetsu-node' for ES6
 var client = sheetsu({ address: '020b2c0f' })
 ```
 
-```javascript
+```javascript--node
 // Update all rows where value of column name is Peter
 // Update only score column
 client.update(
@@ -576,7 +675,7 @@ client.update(
 });
 ```
 
-```javascript
+```javascript--node
 // Update all rows where value of column name is Lois
 // Update whole row
 client.update(
@@ -592,7 +691,7 @@ client.update(
 });
 ```
 
-```javascript
+```javascript--node
 // Update all rows from sheet "Sheet2"
 // where value of column foo is bar
 // Update only baz colum
@@ -627,6 +726,28 @@ client.update(column="name", value="Peter", data=dict(score=120)))
 # Update all rows where value of column name is Peter
 # Update only score column
 client.update(column="name", value="Peter", data=dict(score=120)))
+```
+
+```php
+<?php
+
+require('vendor/autoload.php');
+use Sheetsu\Sheetsu;
+
+$sheetsu = new Sheetsu([
+    'sheetId' => '020b2c0f'
+]);
+
+// Update all rows where value of column name is Peter
+// Update only score column
+$sheetsu->update('name', 'Peter', ['score' => '120']);
+
+
+// Update all rows where value of column name is Peter
+// Update whole row
+$sheetsu->update('name', 'Peter', ['id' => 2, 'name' => 'Loo1z', 'score' => '99999'], true);
+
+?>
 ```
 
 Send `PATCH` (or `PUT`) request to update value(s) of a row(s). To identify the row(s) you want to update you need to add `/{column_name}/{value}` to the API URL. Then you need to pass JSON object with new values. Updates only rows where `{column_name}` match `{value}`.
@@ -677,13 +798,13 @@ sheetsu.delete(
 )
 ```
 
-```javascript
+```javascript--node
 var sheetsu = require('sheetsu-node')
 // import sheetsu from 'sheetsu-node' for ES6
 var client = sheetsu({ address: '020b2c0f' })
 ```
 
-```javascript
+```javascript--node
 // Clear all rows where value of column name is Lois
 client.delete(
   "name", // column name
@@ -695,7 +816,7 @@ client.delete(
 });
 ```
 
-```javascript
+```javascript--node
 // Clear rows from sheet "Sheet2"
 // where value of column foo is bar
 client.delete(
@@ -723,6 +844,28 @@ client.delete(column="name", value="Peter")
 # Clear all rows from sheet named Sheet1
 # where value of column name is Meg
 client.delete(sheet="Sheet1", column="name", value="Meg")
+```
+
+```php
+<?php
+
+require('vendor/autoload.php');
+use Sheetsu\Sheetsu;
+
+$sheetsu = new Sheetsu([
+    'sheetId' => '020b2c0f'
+]);
+
+
+// Clear all rows where value of column name is Peter
+$sheetsu->delete('name', 'Peter');
+
+
+// Clear all rows from sheet named Sheet1
+// where value of column name is Meg
+$sheetsu->sheet('Sheet1')->delete('name', 'Meg');
+
+?>
 ```
 
 Send DELETE request with a `/{column_name}/{value}` path added at the end of the URL to delete row(s). Clear row(s) where `{column_name}` match `{value}`. Clear doesn't change the number of rows.
