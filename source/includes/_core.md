@@ -121,6 +121,23 @@ $collection = $response->getCollection();
 ?>
 ```
 
+```javascript--jquery
+function successFunc(data) {
+  console.log(data);
+}
+
+// Read whole spreadsheet
+var url = "https://sheetsu.com/apis/v1.0/020b2c0f";
+$.ajax({ url: url, success: successFunc });
+
+
+// Read first two rows from sheet "Sheet2"
+var url = "https://sheetsu.com/apis/v1.0/020b2c0f/sheets/Sheet2";
+var params = { "limit": 2 };
+$.ajax({ url: url, data: params, success: successFunc });
+
+```
+
 API can return whole Google Spreadsheet via a `GET` method to `https://sheetsu.com/apis/v1.0/{id}`.
 
 ### Request Parameters
@@ -342,6 +359,40 @@ $collection = $response->getCollection();
 ?>
 ```
 
+```javascript--jquery
+function successFunc(data) {
+  console.log(data);
+}
+
+// Read whole spreadsheet
+$.ajax({ url: url, success: successFunc });
+
+
+// Get all rows where column 'score' is '42'
+var url = "https://sheetsu.com/apis/v1.0/020b2c0f/search";
+var params = { "score": 42 };
+$.ajax({ url: url, data: params, success: successFunc });
+
+
+// Get all rows where column 'score' is '42'
+// and column 'name' is 'Peter'
+var url = "https://sheetsu.com/apis/v1.0/020b2c0f/search";
+var params = { "score": 42, "name": "Peter" };
+$.ajax({ url: url, data: params, success: successFunc });
+
+
+// Get first two rows where column 'foo' is 'bar'
+// from sheet "Sheet2"
+var url = "https://sheetsu.com/apis/v1.0/020b2c0f/sheets/Sheet2/search";
+var params = { "foo": "bar" };
+$.ajax({ url: url, data: params, success: successFunc });
+
+
+// Get all rows where column 'name' is contains string 'oi'
+var url = "https://sheetsu.com/apis/v1.0/020b2c0f/search";
+var params = { "name": "*oi*" };
+$.ajax({ url: url, data: params, success: successFunc });
+```
 
 
 
@@ -575,6 +626,40 @@ $sheetsu->create([
 ?>
 ```
 
+```javascript--jquery
+function successFunc(data) {
+  console.log(data);
+}
+
+// Adds single row to spreadsheet
+var url = "https://sheetsu.com/apis/v1.0/020b2c0f";
+var params = { id: 7, name: 'Glenn', score: 96 };
+$.ajax({ type: "POST", url: url, data: params, success: successFunc });
+
+
+// Adds single row to spreadsheet to sheet named "Sheet2"
+var url = "https://sheetsu.com/apis/v1.0/020b2c0f/sheets/Sheet2";
+var params = { id: 7, name: 'Glenn', score: 96 };
+$.ajax({ type: "POST", url: url, data: params, success: successFunc });
+
+
+// Adds bunch of rows to spreadsheet
+var url = "https://sheetsu.com/apis/v1.0/020b2c0f";
+var params = JSON.stringify({
+  rows: [
+    { id: 7, name: 'Glenn', score: 96 },
+    { id: 8, name: 'Brian', score: 77 },
+    { id: 9, name: 'Joe', score: 45 }  
+  ]
+});
+$.ajax(
+  {
+    type: "POST", url: url, data: params, success: successFunc,
+    contentType: 'application/json', processData: false
+  }
+);
+```
+
 Add a row to Google Spreadsheet by sending a JSON object via `POST` request.
 
 ### Multiple rows
@@ -750,6 +835,25 @@ $sheetsu->update('name', 'Peter', ['id' => 2, 'name' => 'Loo1z', 'score' => '999
 ?>
 ```
 
+```javascript--jquery
+function successFunc(data) {
+  console.log(data);
+}
+
+// Update all rows where value of column name is Peter
+// Update only score column
+var url = "https://sheetsu.com/apis/v1.0/020b2c0f/name/Peter";
+var params = { score: 120 };
+$.ajax({ type: "PATCH", url: url, data: params, success: successFunc });
+
+
+// Update all rows where value of column name is Peter
+// Update whole row
+var url = "https://sheetsu.com/apis/v1.0/020b2c0f/name/Peter";
+var params = { id: 2, name: 'Loo1z', score: '99999' };
+$.ajax({ type: "PUT", url: url, data: params, success: successFunc });
+```
+
 Send `PATCH` (or `PUT`) request to update value(s) of a row(s). To identify the row(s) you want to update you need to add `/{column_name}/{value}` to the API URL. Then you need to pass JSON object with new values. Updates only rows where `{column_name}` match `{value}`.
 
 ### Difference between `PUT` and `PATCH`
@@ -868,6 +972,22 @@ $sheetsu->sheet('Sheet1')->delete('name', 'Meg');
 ?>
 ```
 
+```javascript--jquery
+function successFunc(data) {
+  console.log(data);
+}
+
+// Clear all rows where value of column name is Peter
+var url = "https://sheetsu.com/apis/v1.0/020b2c0f/name/Peter";
+$.ajax({ type: "DELETE", url: url, success: successFunc });
+
+
+// Clear all rows from sheet named Sheet1
+// where value of column name is Meg
+var url = "https://sheetsu.com/apis/v1.0/020b2c0f/sheets/Sheet1/name/Meg";
+$.ajax({ type: "DELETE", url: url, success: successFunc });
+```
+
 Send DELETE request with a `/{column_name}/{value}` path added at the end of the URL to delete row(s). Clear row(s) where `{column_name}` match `{value}`. Clear doesn't change the number of rows.
 
 ### Returns
@@ -915,6 +1035,43 @@ curl "https://sheetsu.com/apis/v1.0/020b2c0f" \
 -X DELETE \
 -H "Content-Type: application/json" \
 -d '{ "name": "*oi*" }'
+```
+
+```javascript--jquery
+function successFunc(data) {
+  console.log(data);
+}
+
+// Destroy all rows where column 'name' is 'Lois'
+var url = "https://sheetsu.com/apis/v1.0/020b2c0f";
+var params = { name: "Lois" }
+$.ajax({ type: "DELETE", url: url, data: params, success: successFunc });
+
+
+// Destroy all rows where column 'score' is '42'
+// and column 'name' is 'Peter'
+var url = "https://sheetsu.com/apis/v1.0/020b2c0f";
+var params = { score: 42, name: "Peter" }
+$.ajax({ type: "DELETE", url: url, data: params, success: successFunc });
+
+
+// Destroy all rows from sheet 'Sheet2'
+// where column 'score' is '42' and column 'name' is 'Peter'
+var url = "https://sheetsu.com/apis/v1.0/020b2c0f/sheets/Sheet2";
+var params = { score: 42, name: "Peter" }
+$.ajax({ type: "DELETE", url: url, data: params, success: successFunc });
+
+
+// Destroy all rows where column 'name' is starting with 'p' or 'P'
+var url = "https://sheetsu.com/apis/v1.0/020b2c0f";
+var params = { name: "p*", ignore_case: true }
+$.ajax({ type: "DELETE", url: url, data: params, success: successFunc });
+
+
+// Destroy all rows where column 'name' contains string 'oi'
+var url = "https://sheetsu.com/apis/v1.0/020b2c0f";
+var params = { name: "*oi*" }
+$.ajax({ type: "DELETE", url: url, data: params, success: successFunc });
 ```
 
 Send DELETE request to destroy all matched rows, move up below rows and decrease number of rows. Pass params in a `column_name=value` as params to the request.
