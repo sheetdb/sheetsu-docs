@@ -11,7 +11,8 @@ language_tabs:
   - php: PHP
   - javascript--jquery: JQuery
   - csharp: C#
-
+  - swift: Swift
+  
 toc_footers:
   - <a href="https://sheetsu.com/your-apis">Dashboard</a>
   - <a href="https://sheetsu.com/pricing">Pricing</a>
