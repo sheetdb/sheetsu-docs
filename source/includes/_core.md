@@ -138,6 +138,31 @@ $.ajax({ url: url, data: params, success: successFunc });
 
 ```
 
+```swift
+import Foundation
+
+// Read whole spreadsheet
+let url = String(format: "https://sheetsu.com/apis/v1.0/020b2c0f")
+let serviceUrl = URL(string: url)
+var request = URLRequest(url: serviceUrl!)
+
+request.httpMethod = "GET"
+request.setValue("Application/json", forHTTPHeaderField: "Content-Type")
+
+let session = URLSession.shared
+
+session.dataTask(with: request) { (data, response, error) in
+  if let data = data {
+    do {
+      let json = try JSONSerialization.jsonObject(with: data, options: [])
+      print(json)
+    } catch {
+      print(error)
+    }
+  }
+}.resume()
+```
+
 API can return whole Google Spreadsheet via a `GET` method to `https://sheetsu.com/apis/v1.0/{id}`.
 
 ### Request Parameters
@@ -394,6 +419,29 @@ var params = { "name": "*oi*" };
 $.ajax({ url: url, data: params, success: successFunc });
 ```
 
+```swift
+import Foundation
+
+// Get all rows where column 'score' is '42'
+let url = String(format: "https://sheetsu.com/apis/v1.0/020b2c0f/search?score=42")
+let serviceUrl = URL(string: url)
+var request = URLRequest(url: serviceUrl!)
+request.httpMethod = "GET"
+request.setValue("Application/json", forHTTPHeaderField: "Content-Type")
+
+let session = URLSession.shared
+
+session.dataTask(with: request) { (data, response, error) in
+  if let data = data {
+    do {
+      let json = try JSONSerialization.jsonObject(with: data, options: [])
+      print(json)
+    } catch {
+      print(error)
+    }
+  }
+}.resume()
+```
 
 
 Search Google Spreadsheet for particular records. Pass params in a `column_name=value` as params to the `GET https://sheetsu.com/apis/v1.0/{id}/search` request.
@@ -660,6 +708,36 @@ $.ajax(
 );
 ```
 
+```swift
+import Foundation
+
+// Adds single row to spreadsheet
+let url = String(format: "https://sheetsu.com/apis/v1.0/020b2c0f")
+let serviceUrl = URL(string: url)
+let parameterDictionary = ["id" : "6", "name" : "Glenn", "score": "44"]
+var request = URLRequest(url: serviceUrl!)
+
+request.httpMethod = "POST"
+request.setValue("Application/json", forHTTPHeaderField: "Content-Type")
+
+let httpBody = try? JSONSerialization.data(withJSONObject: parameterDictionary, options: [])
+
+request.httpBody = httpBody
+
+let session = URLSession.shared
+
+session.dataTask(with: request) { (data, response, error) in
+  if let data = data {
+    do {
+      let json = try JSONSerialization.jsonObject(with: data, options: [])
+      print(json)
+    } catch {
+      print(error)
+    }
+  }
+}.resume()
+```
+
 Add a row to Google Spreadsheet by sending a JSON object via `POST` request.
 
 ### Multiple rows
@@ -854,6 +932,44 @@ var params = { id: 2, name: 'Loo1z', score: '99999' };
 $.ajax({ type: "PUT", url: url, data: params, success: successFunc });
 ```
 
+```swift
+import Foundation
+
+// Update all rows where value of column name is Peter
+let url = String(format: "https://sheetsu.com/apis/v1.0/020b2c0f/name/Peter")
+let serviceUrl = URL(string: url)
+
+// Update only score column
+let parameterDictionary = ["score": "1337"]
+var request = URLRequest(url: serviceUrl!)
+
+request.httpMethod = "PATCH"
+request.setValue("Application/json", forHTTPHeaderField: "Content-Type")
+
+let httpBody = try? JSONSerialization.data(
+  withJSONObject: parameterDictionary,
+  options: []
+)
+
+request.httpBody = httpBody
+
+let session = URLSession.shared
+
+session.dataTask(with: request) { (data, response, error) in
+  if let data = data {
+    do {
+      let json = try JSONSerialization.jsonObject(
+        with: data,
+        options: []
+      )
+      print(json)
+    } catch {
+      print(error)
+    }
+  }
+}.resume()
+```
+
 Send `PATCH` (or `PUT`) request to update value(s) of a row(s). To identify the row(s) you want to update you need to add `/{column_name}/{value}` to the API URL. Then you need to pass JSON object with new values. Updates only rows where `{column_name}` match `{value}`.
 
 ### Difference between `PUT` and `PATCH`
@@ -986,6 +1102,34 @@ $.ajax({ type: "DELETE", url: url, success: successFunc });
 // where value of column name is Meg
 var url = "https://sheetsu.com/apis/v1.0/020b2c0f/sheets/Sheet1/name/Meg";
 $.ajax({ type: "DELETE", url: url, success: successFunc });
+```
+
+```swift
+import Foundation
+
+// Clear all rows where value of column name is Peter
+let url = String(format: "https://sheetsu.com/apis/v1.0/020b2c0f/name/Peter")
+let serviceUrl = URL(string: url)
+var request = URLRequest(url: serviceUrl!)
+
+request.httpMethod = "DELETE"
+request.setValue("Application/json", forHTTPHeaderField: "Content-Type")
+
+let session = URLSession.shared
+
+session.dataTask(with: request) { (data, response, error) in
+  if let data = data {
+    do {
+      let json = try JSONSerialization.jsonObject(
+        with: data,
+        options: []
+      )
+      print(json)
+    } catch {
+      print(error)
+    }
+  }
+}.resume()
 ```
 
 Send DELETE request with a `/{column_name}/{value}` path added at the end of the URL to delete row(s). Clear row(s) where `{column_name}` match `{value}`. Clear doesn't change the number of rows.
