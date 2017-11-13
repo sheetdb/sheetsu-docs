@@ -138,6 +138,31 @@ $.ajax({ url: url, data: params, success: successFunc });
 
 ```
 
+```csharp
+using System;
+using System.Net;
+using System.IO;
+
+namespace Sheetsu
+{
+    public class Example
+    {
+        public static void Main(string[] args)
+        {
+            string sheetsuResponse = string.Empty;
+            string apiUrl = @"https://sheetsu.com/apis/v1.0/020b2c0f";
+
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(apiUrl);
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+
+            Stream stream = response.GetResponseStream();
+            StreamReader reader = new StreamReader(stream);
+            sheetsuResponse = reader.ReadToEnd();
+        }
+    }
+}
+```
+
 ```swift
 import Foundation
 
@@ -417,6 +442,31 @@ $.ajax({ url: url, data: params, success: successFunc });
 var url = "https://sheetsu.com/apis/v1.0/020b2c0f/search";
 var params = { "name": "*oi*" };
 $.ajax({ url: url, data: params, success: successFunc });
+```
+
+```csharp
+using System;
+using System.Net;
+using System.IO;
+
+namespace Sheetsu
+{
+    public class Example
+    {
+        public static void Main(string[] args)
+        {
+            string sheetsuResponse = string.Empty;
+            string apiUrl = @"https://sheetsu.com/apis/v1.0/020b2c0f/search?score=42";
+
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(apiUrl);
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+
+            Stream stream = response.GetResponseStream();
+            StreamReader reader = new StreamReader(stream);
+            sheetsuResponse = reader.ReadToEnd();
+        }
+    }
+}
 ```
 
 ```swift
@@ -708,6 +758,40 @@ $.ajax(
 );
 ```
 
+```csharp
+using System;
+using System.Net;
+using System.IO;
+
+namespace Sheetsu
+{
+    public class Example
+    {
+        public static void Main(string[] args)
+        {
+            string apiUrl = @"https://sheetsu.com/apis/v1.0/020b2c0f";
+            string sheetsuResponse = string.Empty;
+
+            HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(apiUrl);
+            httpWebRequest.ContentType = "application/json";
+            httpWebRequest.Method = "POST";
+
+            StreamWriter streamWriter = new StreamWriter(httpWebRequest.GetRequestStream());
+            string json = "{\"id\":\"6\", \"name\": \"Glenn\", \"score\": \"1000\"}";
+
+            streamWriter.Write(json);
+            streamWriter.Flush();
+            streamWriter.Close();
+
+            HttpWebResponse response = (HttpWebResponse)httpWebRequest.GetResponse();
+            StreamReader reader = new StreamReader(response.GetResponseStream());
+
+            sheetsuResponse = reader.ReadToEnd();
+        }
+    }
+}
+```
+
 ```swift
 import Foundation
 
@@ -932,6 +1016,40 @@ var params = { id: 2, name: 'Loo1z', score: '99999' };
 $.ajax({ type: "PUT", url: url, data: params, success: successFunc });
 ```
 
+```csharp
+using System;
+using System.Net;
+using System.IO;
+
+namespace Sheetsu
+{
+    public class Example
+    {
+        public static void Main(string[] args)
+        {
+            string apiUrl = @"https://sheetsu.com/apis/v1.0/020b2c0f/name/Peter";
+            string sheetsuResponse = string.Empty;
+
+            HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(apiUrl);
+            httpWebRequest.ContentType = "application/json";
+            httpWebRequest.Method = "PATCH";
+
+            StreamWriter streamWriter = new StreamWriter(httpWebRequest.GetRequestStream());
+            string json = "{\"score\": \"9999\"}";
+
+            streamWriter.Write(json);
+            streamWriter.Flush();
+            streamWriter.Close();
+
+            HttpWebResponse response = (HttpWebResponse)httpWebRequest.GetResponse();
+            StreamReader reader = new StreamReader(response.GetResponseStream());
+
+            sheetsuResponse = reader.ReadToEnd();
+        }
+    }
+}
+```
+
 ```swift
 import Foundation
 
@@ -1102,6 +1220,33 @@ $.ajax({ type: "DELETE", url: url, success: successFunc });
 // where value of column name is Meg
 var url = "https://sheetsu.com/apis/v1.0/020b2c0f/sheets/Sheet1/name/Meg";
 $.ajax({ type: "DELETE", url: url, success: successFunc });
+```
+
+```csharp
+using System;
+using System.Net;
+using System.IO;
+
+namespace Sheetsu
+{
+    public class Example
+    {
+        public static void Main(string[] args)
+        {
+            string apiUrl = @"https://sheetsu.com/apis/v1.0/020b2c0f/name/Peter";
+            string sheetsuResponse = string.Empty;
+
+            HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(apiUrl);
+            httpWebRequest.ContentType = "application/json";
+            httpWebRequest.Method = "DELETE";
+
+            HttpWebResponse response = (HttpWebResponse)httpWebRequest.GetResponse();
+            StreamReader reader = new StreamReader(response.GetResponseStream());
+
+            sheetsuResponse = reader.ReadToEnd();
+        }
+    }
+}
 ```
 
 ```swift
