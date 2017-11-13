@@ -138,6 +138,30 @@ $.ajax({ url: url, data: params, success: successFunc });
 
 ```
 
+```csharp
+using System;
+using System.Net;
+using System.IO;
+
+namespace Sheetsu
+{
+    public class Example
+    {
+        public static void Main(string[] args)
+        {
+            string sheetsuResponse = string.Empty;
+            string apiUrl = @"https://sheetsu.com/apis/v1.0/020b2c0f";
+
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(apiUrl);
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+
+            Stream stream = response.GetResponseStream();
+            StreamReader reader = new StreamReader(stream);
+            sheetsuResponse = reader.ReadToEnd();
+        }
+    }
+}
+```
 API can return whole Google Spreadsheet via a `GET` method to `https://sheetsu.com/apis/v1.0/{id}`.
 
 ### Request Parameters
@@ -394,7 +418,30 @@ var params = { "name": "*oi*" };
 $.ajax({ url: url, data: params, success: successFunc });
 ```
 
+```csharp
+using System;
+using System.Net;
+using System.IO;
 
+namespace Sheetsu
+{
+    public class Example
+    {
+        public static void Main(string[] args)
+        {
+            string sheetsuResponse = string.Empty;
+            string apiUrl = @"https://sheetsu.com/apis/v1.0/020b2c0f/search?score=42";
+
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(apiUrl);
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+
+            Stream stream = response.GetResponseStream();
+            StreamReader reader = new StreamReader(stream);
+            sheetsuResponse = reader.ReadToEnd();
+        }
+    }
+}
+```
 
 Search Google Spreadsheet for particular records. Pass params in a `column_name=value` as params to the `GET https://sheetsu.com/apis/v1.0/{id}/search` request.
 
@@ -660,6 +707,39 @@ $.ajax(
 );
 ```
 
+```csharp
+using System;
+using System.Net;
+using System.IO;
+
+namespace Sheetsu
+{
+    public class Example
+    {
+        public static void Main(string[] args)
+        {
+            string apiUrl = @"https://sheetsu.com/apis/v1.0/020b2c0f";
+            string sheetsuResponse = string.Empty;
+
+            HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(apiUrl);
+            httpWebRequest.ContentType = "application/json";
+            httpWebRequest.Method = "POST";
+
+            StreamWriter streamWriter = new StreamWriter(httpWebRequest.GetRequestStream());
+            string json = "{\"id\":\"6\", \"name\": \"Glenn\", \"score\": \"1000\"}";
+
+            streamWriter.Write(json);
+            streamWriter.Flush();
+            streamWriter.Close();
+
+            HttpWebResponse response = (HttpWebResponse)httpWebRequest.GetResponse();
+            StreamReader reader = new StreamReader(response.GetResponseStream());
+
+            sheetsuResponse = reader.ReadToEnd();
+        }
+    }
+}
+```
 Add a row to Google Spreadsheet by sending a JSON object via `POST` request.
 
 ### Multiple rows
@@ -854,6 +934,40 @@ var params = { id: 2, name: 'Loo1z', score: '99999' };
 $.ajax({ type: "PUT", url: url, data: params, success: successFunc });
 ```
 
+```csharp
+using System;
+using System.Net;
+using System.IO;
+
+namespace Sheetsu
+{
+    public class Example
+    {
+        public static void Main(string[] args)
+        {
+            string apiUrl = @"https://sheetsu.com/apis/v1.0/020b2c0f/name/Peter";
+            string sheetsuResponse = string.Empty;
+
+            HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(apiUrl);
+            httpWebRequest.ContentType = "application/json";
+            httpWebRequest.Method = "PATCH";
+
+            StreamWriter streamWriter = new StreamWriter(httpWebRequest.GetRequestStream());
+            string json = "{\"score\": \"9999\"}";
+
+            streamWriter.Write(json);
+            streamWriter.Flush();
+            streamWriter.Close();
+
+            HttpWebResponse response = (HttpWebResponse)httpWebRequest.GetResponse();
+            StreamReader reader = new StreamReader(response.GetResponseStream());
+
+            sheetsuResponse = reader.ReadToEnd();
+        }
+    }
+}
+```
+
 Send `PATCH` (or `PUT`) request to update value(s) of a row(s). To identify the row(s) you want to update you need to add `/{column_name}/{value}` to the API URL. Then you need to pass JSON object with new values. Updates only rows where `{column_name}` match `{value}`.
 
 ### Difference between `PUT` and `PATCH`
@@ -986,6 +1100,33 @@ $.ajax({ type: "DELETE", url: url, success: successFunc });
 // where value of column name is Meg
 var url = "https://sheetsu.com/apis/v1.0/020b2c0f/sheets/Sheet1/name/Meg";
 $.ajax({ type: "DELETE", url: url, success: successFunc });
+```
+
+```csharp
+using System;
+using System.Net;
+using System.IO;
+
+namespace Sheetsu
+{
+    public class Example
+    {
+        public static void Main(string[] args)
+        {
+            string apiUrl = @"https://sheetsu.com/apis/v1.0/020b2c0f/name/Peter";
+            string sheetsuResponse = string.Empty;
+
+            HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(apiUrl);
+            httpWebRequest.ContentType = "application/json";
+            httpWebRequest.Method = "DELETE";
+
+            HttpWebResponse response = (HttpWebResponse)httpWebRequest.GetResponse();
+            StreamReader reader = new StreamReader(response.GetResponseStream());
+
+            sheetsuResponse = reader.ReadToEnd();
+        }
+    }
+}
 ```
 
 Send DELETE request with a `/{column_name}/{value}` path added at the end of the URL to delete row(s). Clear row(s) where `{column_name}` match `{value}`. Clear doesn't change the number of rows.

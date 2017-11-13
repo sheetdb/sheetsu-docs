@@ -10,6 +10,7 @@ language_tabs:
   - python: Python
   - php: PHP
   - javascript--jquery: JQuery
+  - csharp: C#
 
 toc_footers:
   - <a href="https://sheetsu.com/your-apis">Dashboard</a>
