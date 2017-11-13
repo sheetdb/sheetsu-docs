@@ -5,9 +5,11 @@ language_tabs:
   - shell: cURL
   - xml: HTML Snippet
   - ruby: Ruby
-  - javascript: Node
+  - javascript--node: Node
   - html: JavaScript Web Client
   - python: Python
+  - php: PHP
+  - javascript--jquery: JQuery
 
 toc_footers:
   - <a href="https://sheetsu.com/your-apis">Dashboard</a>
