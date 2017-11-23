@@ -339,6 +339,139 @@ response <- POST(
 data <- content(response, "parsed")
 ```
 
+
+```jsx
+// Display form, which will
+// save record to the Google Spreadsheet
+class SheetsuCreate extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { data: { id: '', name: '', score: '' } };
+
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleInputChange(event) {
+    var updatedData = this.state.data;
+    updatedData[event.target.name] = event.target.value
+
+    this.setState({
+      data: updatedData
+    });
+  }
+
+  handleSubmit(event) {
+  	event.preventDefault();
+
+    fetch("https://sheetsu.com/apis/v1.0/020b2c0f", {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: "POST",
+      body: JSON.stringify(this.state.data)
+     }).then( (response) => {
+        return response.json()
+      }).then( (json) => {
+        console.log(json);
+      });
+  }
+
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <input
+          type="text"
+          name="id"
+          value={this.state.data.id}
+          onChange={this.handleInputChange}
+        />
+        <input
+          type="text"
+          name="name"
+          value={this.state.data.name}
+          onChange={this.handleInputChange}
+        />
+        <input
+          type="text"
+          name="score"
+          value={this.state.data.score}
+          onChange={this.handleInputChange}
+        />
+        <input type="submit"/>
+      </form>
+    );
+  }
+}
+
+
+// Display form, which will
+// save record to the Google Spreadsheet
+// to sheet "Sheet1"
+class SheetsuCreate extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { data: { id: '', name: '', score: '' } };
+
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleInputChange(event) {
+    var updatedData = this.state.data;
+    updatedData[event.target.name] = event.target.value
+
+    this.setState({
+      data: updatedData
+    });
+  }
+
+  handleSubmit(event) {
+  	event.preventDefault();
+
+    fetch("https://sheetsu.com/apis/v1.0/020b2c0f/sheets/Sheet1", {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: "POST",
+      body: JSON.stringify(this.state.data)
+     }).then( (response) => {
+        return response.json()
+      }).then( (json) => {
+        console.log(json);
+      });
+  }
+
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <input
+          type="text"
+          name="id"
+          value={this.state.data.id}
+          onChange={this.handleInputChange}
+        />
+        <input
+          type="text"
+          name="name"
+          value={this.state.data.name}
+          onChange={this.handleInputChange}
+        />
+        <input
+          type="text"
+          name="score"
+          value={this.state.data.score}
+          onChange={this.handleInputChange}
+        />
+        <input type="submit"/>
+      </form>
+    );
+  }
+}
+```
+
 Add a row to Google Spreadsheet by sending a JSON object via `POST` request.
 
 ### Multiple rows
