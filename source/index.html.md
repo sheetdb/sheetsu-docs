@@ -13,6 +13,7 @@ language_tabs:
   - csharp: C#
   - swift: Swift
   - r: R
+  - jsx: React
 
 toc_footers:
   - <a href="https://sheetsu.com/your-apis">Dashboard</a>

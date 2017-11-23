@@ -203,6 +203,76 @@ response <- GET(
 data <- content(response, "parsed")
 ```
 
+```jsx
+// Read whole spreadsheet
+class SheetsuRead extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: [],
+    };
+  }
+
+  componentDidMount() {
+    fetch("https://sheetsu.com/apis/v1.0/020b2c0f")
+      .then( (response) => {
+        return response.json()
+      }).then( (json) => {
+        this.setState({data: json});
+      });
+  }
+
+  renderData() {
+    return this.state.data.map((row) =>
+     <div key={row.id}>{row.name} {row.score}</div>
+    );
+  }
+
+  render() {
+    return (
+      <div>
+        {this.renderData()}
+      </div>
+    );
+  }
+}
+
+
+// Read first two rows from sheet "Sheet1"
+class SheetsuRead extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: [],
+    };
+  }
+
+  componentDidMount() {
+    fetch("https://sheetsu.com/apis/v1.0/020b2c0f/sheets/Sheet1?limit=2")
+      .then( (response) => {
+        return response.json()
+      }).then( (json) => {
+        this.setState({data: json});
+      });
+  }
+
+  renderData() {
+    return this.state.data.map((row) =>
+     <div key={row.id}>{row.name} {row.score}</div>
+    );
+  }
+
+  render() {
+    return (
+      <div>
+        {this.renderData()}
+      </div>
+    );
+  }
+}
+
+```
+
 API can return whole Google Spreadsheet via a `GET` method to `https://sheetsu.com/apis/v1.0/{id}`.
 
 ### Request Parameters
@@ -543,6 +613,76 @@ response <- GET(
   query = query
 )
 data <- content(response, "parsed")
+```
+
+```jsx
+// Get all records where score is 42
+class SheetsuSearch extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: [],
+    };
+  }
+
+  componentDidMount() {
+    fetch("https://sheetsu.com/apis/v1.0/020b2c0f/search?score=42")
+      .then( (response) => {
+        return response.json()
+      }).then( (json) => {
+        this.setState({data: json});
+      });
+  }
+
+  renderData() {
+    return this.state.data.map((row) =>
+     <div key={row.id}>{row.name} {row.score}</div>
+    );
+  }
+
+  render() {
+    return (
+      <div>
+        {this.renderData()}
+      </div>
+    );
+  }
+}
+
+
+// Get all records where score is 42
+// from sheet "Sheet1"
+class SheetsuSearch extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: [],
+    };
+  }
+
+  componentDidMount() {
+    fetch("https://sheetsu.com/apis/v1.0/020b2c0f/sheets/Sheet1/search?score=42")
+      .then( (response) => {
+        return response.json()
+      }).then( (json) => {
+        this.setState({data: json});
+      });
+  }
+
+  renderData() {
+    return this.state.data.map((row) =>
+     <div key={row.id}>{row.name} {row.score}</div>
+    );
+  }
+
+  render() {
+    return (
+      <div>
+        {this.renderData()}
+      </div>
+    );
+  }
+}
 ```
 
 Search Google Spreadsheet for particular records. Pass params in a `column_name=value` as params to the `GET https://sheetsu.com/apis/v1.0/{id}/search` request.
