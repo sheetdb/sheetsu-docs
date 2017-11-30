@@ -66,6 +66,25 @@ Please contact
 <a href="#creating-api-programmatically" onclick='Intercom("showNewMessage", "Hello there! 👋 I need my api_key so I could create my API programmatically")'>support</a>
  to get your `api_key`.
 
+## Assigning permissions to an API
+While creating new API, you can assign read/write permission as well as set up authentication for the API. By default, all permissions are set to `true`.
+
+```shell
+# Creates new API with HTTP Basic Auth
+curl "https://sheetsu.com/apis/v1.0/api_sheets" \
+-X POST \
+-H "Content-Type: application/json" \
+-d '{ "email": "your@email.com", "api_key": "api_key", "google_spreadsheet_url": "your_doc_url", authenticate: true }'
+```
+
+```shell
+# Creates new API with only write permission enabled
+curl "https://sheetsu.com/apis/v1.0/api_sheets" \
+-X POST \
+-H "Content-Type: application/json" \
+-d '{ "email": "your@email.com", "api_key": "api_key", "google_spreadsheet_url": "your_doc_url", can_create: true, can_read: false, can_update: false, can_delete: false }'
+```
+
 # Rate Limits
 Every API has a rate limit. You can check rate limitś for APIs on the [pricing page](https://sheetsu.com/pricing). After hitting the limit for the particular API, you receive `429 Rate limit exceeded` status code.
 
