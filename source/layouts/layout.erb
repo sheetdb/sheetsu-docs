@@ -138,11 +138,41 @@ under the License.
     <script>(function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',intercomSettings);}else{var d=document;var i=function(){i.c(arguments)};i.q=[];i.c=function(args){i.q.push(args)};w.Intercom=i;function l(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/cb8qlaxf';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);}if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})()</script>
 
     <script type="text/javascript">
-    /* <![CDATA[ */
-    var google_conversion_id = 846613104;
-    var google_custom_params = window.google_tag_params;
-    var google_remarketing_only = true;
-    /* ]]> */
+      /* <![CDATA[ */
+      var google_conversion_id = 846613104;
+      var google_custom_params = window.google_tag_params;
+      var google_remarketing_only = true;
+      /* ]]> */
+      </script>
+      <script type="text/javascript">
+      var getUrlParameter = function getUrlParameter(sParam) {
+        var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+          sURLVariables = sPageURL.split('&'),
+          sParameterName,
+          i;
+
+        for (i = 0; i < sURLVariables.length; i++) {
+          sParameterName = sURLVariables[i].split('=');
+
+          if (sParameterName[0] === sParam) {
+            return sParameterName[1];
+          }
+        }
+      };
+
+      function createCookie(name,value,days) {
+        var expires = "";
+        if (days) {
+            var date = new Date();
+            date.setTime(date.getTime() + (days*24*60*60*1000));
+            expires = "; expires=" + date.toUTCString();
+        }
+        document.cookie = name + "=" + value + expires + "; path=/";
+      }
+      var sheetsu_ref_code = getUrlParameter('ref');
+      if (sheetsu_ref_code) {
+        createCookie('referral', sheetsu_ref_code, 10000);
+      }
     </script>
     <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
     </script>
