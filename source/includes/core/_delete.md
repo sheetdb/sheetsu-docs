@@ -71,7 +71,7 @@ client.delete(
 
 ```python
 from sheetsu import SheetsuClient
-client = SheetsuClient("020b2c0f")
+client = SheetsuClient("https://sheetsu.com/apis/v1.0dy/020b2c0f")
 ```
 
 ```python
@@ -92,7 +92,7 @@ require('vendor/autoload.php');
 use Sheetsu\Sheetsu;
 
 $sheetsu = new Sheetsu([
-    'sheetId' => '020b2c0f'
+    'sheetId' => 'https://sheetsu.com/apis/v1.0dp/020b2c0f'
 ]);
 
 
