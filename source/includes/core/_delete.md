@@ -3,20 +3,20 @@
 ## Clear
 ```shell
 # Clear all rows where name is Lois
-curl "https://sheetsu.com/apis/v1.0/020b2c0f/name/Lois" \
+curl "https://sheetsu.com/apis/v1.0db/020b2c0f/name/Lois" \
 -X DELETE
 ```
 
 ```shell
 # Clear all rows from sheet "Sheet2"
 # where value of column foo is bar
-curl "https://sheetsu.com/apis/v1.0/020b2c0f/sheets/Sheet2/foo/bar" \
+curl "https://sheetsu.com/apis/v1.0db/020b2c0f/sheets/Sheet2/foo/bar" \
 -X DELETE
 ```
 
 ```ruby
 require 'sheetsu'
-sheetsu = Sheetsu::Client.new("020b2c0f")
+sheetsu = Sheetsu::Client.new("https://sheetsu.com/apis/v1.0dr/020b2c0f")
 ```
 
 ```ruby
@@ -40,7 +40,7 @@ sheetsu.delete(
 ```javascript--node
 var sheetsu = require('sheetsu-node')
 // import sheetsu from 'sheetsu-node' for ES6
-var client = sheetsu({ address: '020b2c0f' })
+var client = sheetsu({ address: 'https://sheetsu.com/apis/v1.0dn/020b2c0f' })
 ```
 
 ```javascript--node
@@ -113,13 +113,13 @@ function successFunc(data) {
 }
 
 // Clear all rows where value of column name is Peter
-var url = "https://sheetsu.com/apis/v1.0/020b2c0f/name/Peter";
+var url = "https://sheetsu.com/apis/v1.0dq/020b2c0f/name/Peter";
 $.ajax({ type: "DELETE", url: url, success: successFunc });
 
 
 // Clear all rows from sheet named Sheet1
 // where value of column name is Meg
-var url = "https://sheetsu.com/apis/v1.0/020b2c0f/sheets/Sheet1/name/Meg";
+var url = "https://sheetsu.com/apis/v1.0dq/020b2c0f/sheets/Sheet1/name/Meg";
 $.ajax({ type: "DELETE", url: url, success: successFunc });
 ```
 
@@ -134,7 +134,7 @@ namespace Sheetsu
     {
         public static void Main(string[] args)
         {
-            string apiUrl = @"https://sheetsu.com/apis/v1.0/020b2c0f/name/Peter";
+            string apiUrl = @"https://sheetsu.com/apis/v1.0dc/020b2c0f/name/Peter";
             string sheetsuResponse = string.Empty;
 
             HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(apiUrl);
@@ -154,7 +154,7 @@ namespace Sheetsu
 import Foundation
 
 // Clear all rows where value of column name is Peter
-let url = String(format: "https://sheetsu.com/apis/v1.0/020b2c0f/name/Peter")
+let url = String(format: "https://sheetsu.com/apis/v1.0ds/020b2c0f/name/Peter")
 let serviceUrl = URL(string: url)
 var request = URLRequest(url: serviceUrl!)
 
@@ -180,13 +180,13 @@ session.dataTask(with: request) { (data, response, error) in
 
 ```r
 # Clear all rows where value of column name is Peter
-response <- DELETE("https://sheetsu.com/apis/v1.0/020b2c0f/name/Peter")
+response <- DELETE("https://sheetsu.com/apis/v1.0dl/020b2c0f/name/Peter")
 data <- content(response, "parsed")
 
 
 # Clear all rows from sheet named Sheet1
 # where value of column name is Meg
-response <- DELETE("https://sheetsu.com/apis/v1.0/020b2c0f/sheets/Sheet1/name/Meg")
+response <- DELETE("https://sheetsu.com/apis/v1.0dl/020b2c0f/sheets/Sheet1/name/Meg")
 data <- content(response, "parsed")
 ```
 
@@ -199,7 +199,7 @@ On success, returns `204 No Content` HTTP status code, without a body.
 
 ```shell
 # Destroy all rows where column 'name' is 'Lois'
-curl "https://sheetsu.com/apis/v1.0/020b2c0f" \
+curl "https://sheetsu.com/apis/v1.0db/020b2c0f" \
 -X DELETE \
 -H "Content-Type: application/json" \
 -d '{ "name": "Lois" }'
@@ -208,7 +208,7 @@ curl "https://sheetsu.com/apis/v1.0/020b2c0f" \
 ```shell
 # Destroy all rows where column 'score' is '42'
 # and column 'name' is 'Peter'
-curl "https://sheetsu.com/apis/v1.0/020b2c0f" \
+curl "https://sheetsu.com/apis/v1.0db/020b2c0f" \
 -X DELETE \
 -H "Content-Type: application/json" \
 -d '{ "score": "42", "name": "Peter" }'
@@ -217,7 +217,7 @@ curl "https://sheetsu.com/apis/v1.0/020b2c0f" \
 ```shell
 # Destroy all rows from sheet 'Sheet2'
 # where column 'score' is '42' and column 'name' is 'Peter'
-curl "https://sheetsu.com/apis/v1.0/020b2c0f/sheets/Sheet2" \
+curl "https://sheetsu.com/apis/v1.0db/020b2c0f/sheets/Sheet2" \
 -X DELETE \
 -H "Content-Type: application/json" \
 -d '{ "score": "42", "name": "Peter" }'
@@ -225,7 +225,7 @@ curl "https://sheetsu.com/apis/v1.0/020b2c0f/sheets/Sheet2" \
 
 ```shell
 # Destroy all rows where column 'name' is starting with 'p' or 'P'
-curl "https://sheetsu.com/apis/v1.0/020b2c0f" \
+curl "https://sheetsu.com/apis/v1.0db/020b2c0f" \
 -X DELETE \
 -H "Content-Type: application/json" \
 -d '{ "name": "p*", "ignore_case": "true" }'
@@ -233,7 +233,7 @@ curl "https://sheetsu.com/apis/v1.0/020b2c0f" \
 
 ```shell
 # Destroy all rows where column 'name' contains string 'oi'
-curl "https://sheetsu.com/apis/v1.0/020b2c0f" \
+curl "https://sheetsu.com/apis/v1.0db/020b2c0f" \
 -X DELETE \
 -H "Content-Type: application/json" \
 -d '{ "name": "*oi*" }'
@@ -245,33 +245,33 @@ function successFunc(data) {
 }
 
 // Destroy all rows where column 'name' is 'Lois'
-var url = "https://sheetsu.com/apis/v1.0/020b2c0f";
+var url = "https://sheetsu.com/apis/v1.0dq/020b2c0f";
 var params = { name: "Lois" }
 $.ajax({ type: "DELETE", url: url, data: params, success: successFunc });
 
 
 // Destroy all rows where column 'score' is '42'
 // and column 'name' is 'Peter'
-var url = "https://sheetsu.com/apis/v1.0/020b2c0f";
+var url = "https://sheetsu.com/apis/v1.0dq/020b2c0f";
 var params = { score: 42, name: "Peter" }
 $.ajax({ type: "DELETE", url: url, data: params, success: successFunc });
 
 
 // Destroy all rows from sheet 'Sheet2'
 // where column 'score' is '42' and column 'name' is 'Peter'
-var url = "https://sheetsu.com/apis/v1.0/020b2c0f/sheets/Sheet2";
+var url = "https://sheetsu.com/apis/v1.0dq/020b2c0f/sheets/Sheet2";
 var params = { score: 42, name: "Peter" }
 $.ajax({ type: "DELETE", url: url, data: params, success: successFunc });
 
 
 // Destroy all rows where column 'name' is starting with 'p' or 'P'
-var url = "https://sheetsu.com/apis/v1.0/020b2c0f";
+var url = "https://sheetsu.com/apis/v1.0dq/020b2c0f";
 var params = { name: "p*", ignore_case: true }
 $.ajax({ type: "DELETE", url: url, data: params, success: successFunc });
 
 
 // Destroy all rows where column 'name' contains string 'oi'
-var url = "https://sheetsu.com/apis/v1.0/020b2c0f";
+var url = "https://sheetsu.com/apis/v1.0dq/020b2c0f";
 var params = { name: "*oi*" }
 $.ajax({ type: "DELETE", url: url, data: params, success: successFunc });
 ```
@@ -280,7 +280,7 @@ $.ajax({ type: "DELETE", url: url, data: params, success: successFunc });
 # Destroy all rows where column 'name' is 'Lois'
 body <- list(name = "Lois")
 response <- DELETE(
-  "https://sheetsu.com/apis/v1.0/020b2c0f",
+  "https://sheetsu.com/apis/v1.0dl/020b2c0f",
   body = body,
   encode = "json"
 )
@@ -290,7 +290,7 @@ data <- content(response, "parsed")
 # and column 'name' is 'Peter'
 body <- list(score = "42", name = "Peter")
 response <- DELETE(
-  "https://sheetsu.com/apis/v1.0/020b2c0f",
+  "https://sheetsu.com/apis/v1.0dl/020b2c0f",
   body = body,
   encode = "json"
 )
@@ -300,7 +300,7 @@ data <- content(response, "parsed")
 # where column 'score' is '42' and column 'name' is 'Peter'
 body <- list(score = "42", name = "Peter")
 response <- DELETE(
-  "https://sheetsu.com/apis/v1.0/020b2c0f/sheets/Sheet2",
+  "https://sheetsu.com/apis/v1.0dl/020b2c0f/sheets/Sheet2",
   body = body,
   encode = "json"
 )
@@ -309,7 +309,7 @@ data <- content(response, "parsed")
 # Destroy all rows where column 'name' is starting with 'p' or 'P'
 body <- list(name = "p*", ignore_case = "true")
 response <- DELETE(
-  "https://sheetsu.com/apis/v1.0/020b2c0f",
+  "https://sheetsu.com/apis/v1.0dl/020b2c0f",
   body = body,
   encode = "json"
 )
@@ -318,7 +318,7 @@ data <- content(response, "parsed")
 # Destroy all rows where column 'name' is starting with 'p' or 'P'
 body <- list(name = "*oi*")
 response <- DELETE(
-  "https://sheetsu.com/apis/v1.0/020b2c0f",
+  "https://sheetsu.com/apis/v1.0dl/020b2c0f",
   body = body,
   encode = "json"
 )

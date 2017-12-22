@@ -4,17 +4,17 @@
 
 ```shell
 # Read whole spreadsheet
-curl "https://sheetsu.com/apis/v1.0/020b2c0f"
+curl "https://sheetsu.com/apis/v1.0db/020b2c0f"
 ```
 
 ```shell
 # Read first two rows from sheet "Sheet2"
-curl "https://sheetsu.com/apis/v1.0/020b2c0f/sheets/Sheet2?limit=2"
+curl "https://sheetsu.com/apis/v1.0db/020b2c0f/sheets/Sheet2?limit=2"
 ```
 
 ```xml
 <!-- Read whole spreadsheet -->
-<div sheetsu="https://sheetsu.com/apis/v1.0/020b2c0f">
+<div sheetsu="https://sheetsu.com/apis/v1.0dh/020b2c0f">
   <p>Name: {{name}}</p>
   <p>Score: {{score}}</p>
 </div>
@@ -24,7 +24,7 @@ curl "https://sheetsu.com/apis/v1.0/020b2c0f/sheets/Sheet2?limit=2"
 
 ```xml
 <!-- Read first two rows from sheet "Sheet1" -->
-<div sheetsu="https://sheetsu.com/apis/v1.0/020b2c0f" sheetsu-limit="2" sheetsu-sheet="Sheet1">
+<div sheetsu="https://sheetsu.com/apis/v1.0dh/020b2c0f" sheetsu-limit="2" sheetsu-sheet="Sheet1">
   <p>Name: {{name}}</p>
   <p>Score: {{score}}</p>
 </div>
@@ -34,7 +34,7 @@ curl "https://sheetsu.com/apis/v1.0/020b2c0f/sheets/Sheet2?limit=2"
 
 ```ruby
 require 'sheetsu'
-sheetsu = Sheetsu::Client.new("020b2c0f")
+sheetsu = Sheetsu::Client.new("https://sheetsu.com/apis/v1.0dr/020b2c0f")
 ```
 
 ```ruby
@@ -50,7 +50,7 @@ sheetsu.read(sheet: "Sheet2", limit: 2)
 ```javascript--node
 var sheetsu = require('sheetsu-node')
 // import sheetsu from 'sheetsu-node' for ES6
-var client = sheetsu({ address: '020b2c0f' })
+var client = sheetsu({ address: 'https://sheetsu.com/apis/v1.0dn/020b2c0f' })
 ```
 
 ```javascript--node
@@ -81,7 +81,7 @@ client.read({ limit: 2, sheet: "Sheet2" }).then(function(data) {
     function successFunc(data) {
       console.log(data);
     }
-    Sheetsu.read("https://sheetsu.com/apis/v1.0/020b2c0f/", {}, successFunc);
+    Sheetsu.read("https://sheetsu.com/apis/v1.0dh/020b2c0f/", {}, successFunc);
   </script>
 </body>
 ```
@@ -125,12 +125,12 @@ function successFunc(data) {
 }
 
 // Read whole spreadsheet
-var url = "https://sheetsu.com/apis/v1.0/020b2c0f";
+var url = "https://sheetsu.com/apis/v1.0dq/020b2c0f";
 $.ajax({ url: url, success: successFunc });
 
 
 // Read first two rows from sheet "Sheet2"
-var url = "https://sheetsu.com/apis/v1.0/020b2c0f/sheets/Sheet2";
+var url = "https://sheetsu.com/apis/v1.0dq/020b2c0f/sheets/Sheet2";
 var params = { "limit": 2 };
 $.ajax({ url: url, data: params, success: successFunc });
 
@@ -148,7 +148,7 @@ namespace Sheetsu
         public static void Main(string[] args)
         {
             string sheetsuResponse = string.Empty;
-            string apiUrl = @"https://sheetsu.com/apis/v1.0/020b2c0f";
+            string apiUrl = @"https://sheetsu.com/apis/v1.0dc/020b2c0f";
 
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(apiUrl);
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
@@ -165,7 +165,7 @@ namespace Sheetsu
 import Foundation
 
 // Read whole spreadsheet
-let url = String(format: "https://sheetsu.com/apis/v1.0/020b2c0f")
+let url = String(format: "https://sheetsu.com/apis/v1.0ds/020b2c0f")
 let serviceUrl = URL(string: url)
 var request = URLRequest(url: serviceUrl!)
 
@@ -190,14 +190,14 @@ session.dataTask(with: request) { (data, response, error) in
 library(httr)
 
 # Read whole spreadsheet
-response <- GET("https://sheetsu.com/apis/v1.0/020b2c0f")
+response <- GET("https://sheetsu.com/apis/v1.0dl/020b2c0f")
 data <- content(response, "parsed")
 
 
 # Read first two rows from sheet "Sheet2"
 query = list(limit = 2)
 response <- GET(
-  "https://sheetsu.com/apis/v1.0/020b2c0f/sheets/Sheet2",
+  "https://sheetsu.com/apis/v1.0dl/020b2c0f/sheets/Sheet2",
   query = query
 )
 data <- content(response, "parsed")
@@ -214,7 +214,7 @@ class SheetsuRead extends React.Component {
   }
 
   componentDidMount() {
-    fetch("https://sheetsu.com/apis/v1.0/020b2c0f")
+    fetch("https://sheetsu.com/apis/v1.0dt/020b2c0f")
       .then( (response) => {
         return response.json()
       }).then( (json) => {
@@ -248,7 +248,7 @@ class SheetsuRead extends React.Component {
   }
 
   componentDidMount() {
-    fetch("https://sheetsu.com/apis/v1.0/020b2c0f/sheets/Sheet1?limit=2")
+    fetch("https://sheetsu.com/apis/v1.0dt/020b2c0f/sheets/Sheet1?limit=2")
       .then( (response) => {
         return response.json()
       }).then( (json) => {
@@ -289,34 +289,34 @@ An array of objects. Each object is a row from the Google Spreadsheet.
 ## Search spreadsheet
 ```shell
 # Get all rows where column 'score' is '42'
-curl "https://sheetsu.com/apis/v1.0/020b2c0f/search?score=42"
+curl "https://sheetsu.com/apis/v1.0db/020b2c0f/search?score=42"
 ```
 
 ```shell
 # Get all rows where column 'score' is '42'
 # and column 'name' is 'Peter'
-curl "https://sheetsu.com/apis/v1.0/020b2c0f/search?score=42&name=Peter"
+curl "https://sheetsu.com/apis/v1.0db/020b2c0f/search?score=42&name=Peter"
 ```
 
 ```shell
 # Get first two rows where column 'foo' is 'bar',
 # column 'another column' is '1' from sheet "Sheet2"
-curl "https://sheetsu.com/apis/v1.0/020b2c0f/sheets/Sheet2/search?foo=bar&another%20column=1&limit=2"
+curl "https://sheetsu.com/apis/v1.0db/020b2c0f/sheets/Sheet2/search?foo=bar&another%20column=1&limit=2"
 ```
 
 ```shell
 # Get all rows where column 'name' is starting with 'p'
-curl "https://sheetsu.com/apis/v1.0/020b2c0f/search?name=p*&ignore_case=true"
+curl "https://sheetsu.com/apis/v1.0db/020b2c0f/search?name=p*&ignore_case=true"
 ```
 
 ```shell
 # Get all rows where column 'name' is contains string 'oi'
-curl "https://sheetsu.com/apis/v1.0/020b2c0f/search?name=*oi*"
+curl "https://sheetsu.com/apis/v1.0db/020b2c0f/search?name=*oi*"
 ```
 
 ```xml
 <!-- Get all records where score is 42 -->
-<div sheetsu="https://sheetsu.com/apis/v1.0/020b2c0f" sheetsu-search='{"score": "42"}'>
+<div sheetsu="https://sheetsu.com/apis/v1.0dh/020b2c0f" sheetsu-search='{"score": "42"}'>
   <p>Name: {{name}}, score: {{score}}</p>
 </div>
 
@@ -328,7 +328,7 @@ curl "https://sheetsu.com/apis/v1.0/020b2c0f/search?name=*oi*"
   Get all records where score is 42
   from sheet "Sheet1"
 -->
-<div sheetsu="https://sheetsu.com/apis/v1.0/020b2c0f" sheetsu-search='{"score": "42"}' sheetsu-sheet="Sheet1">
+<div sheetsu="https://sheetsu.com/apis/v1.0dh/020b2c0f" sheetsu-search='{"score": "42"}' sheetsu-sheet="Sheet1">
   <p>Name: {{name}}, score: {{score}}</p>
 </div>
 
@@ -337,7 +337,7 @@ curl "https://sheetsu.com/apis/v1.0/020b2c0f/search?name=*oi*"
 
 ```ruby
 require 'sheetsu'
-sheetsu = Sheetsu::Client.new("020b2c0f")
+sheetsu = Sheetsu::Client.new("https://sheetsu.com/apis/v1.0dr/020b2c0f")
 ```
 
 ```ruby
@@ -365,7 +365,7 @@ sheetsu.read(
 ```javascript--node
 var sheetsu = require('sheetsu-node')
 // import sheetsu from 'sheetsu-node' for ES6
-var client = sheetsu({ address: '020b2c0f' })
+var client = sheetsu({ address: 'https://sheetsu.com/apis/v1.0dn/020b2c0f' })
 ```
 
 ```javascript--node
@@ -416,7 +416,7 @@ client.read({
     var searchQuery = {
       score: 42,
     };
-    Sheetsu.read("https://sheetsu.com/apis/v1.0/020b2c0f/", {
+    Sheetsu.read("https://sheetsu.com/apis/v1.0dh/020b2c0f/", {
       search: searchQuery
     }, successFunc);
   </script>
@@ -500,27 +500,27 @@ function successFunc(data) {
 }
 
 // Get all rows where column 'score' is '42'
-var url = "https://sheetsu.com/apis/v1.0/020b2c0f/search";
+var url = "https://sheetsu.com/apis/v1.0dq/020b2c0f/search";
 var params = { "score": 42 };
 $.ajax({ url: url, data: params, success: successFunc });
 
 
 // Get all rows where column 'score' is '42'
 // and column 'name' is 'Peter'
-var url = "https://sheetsu.com/apis/v1.0/020b2c0f/search";
+var url = "https://sheetsu.com/apis/v1.0dq/020b2c0f/search";
 var params = { "score": 42, "name": "Peter" };
 $.ajax({ url: url, data: params, success: successFunc });
 
 
 // Get first two rows where column 'foo' is 'bar'
 // from sheet "Sheet2"
-var url = "https://sheetsu.com/apis/v1.0/020b2c0f/sheets/Sheet2/search";
+var url = "https://sheetsu.com/apis/v1.0dq/020b2c0f/sheets/Sheet2/search";
 var params = { "foo": "bar" };
 $.ajax({ url: url, data: params, success: successFunc });
 
 
 // Get all rows where column 'name' contains string 'oi'
-var url = "https://sheetsu.com/apis/v1.0/020b2c0f/search";
+var url = "https://sheetsu.com/apis/v1.0dq/020b2c0f/search";
 var params = { "name": "*oi*" };
 $.ajax({ url: url, data: params, success: successFunc });
 ```
@@ -537,7 +537,7 @@ namespace Sheetsu
         public static void Main(string[] args)
         {
             string sheetsuResponse = string.Empty;
-            string apiUrl = @"https://sheetsu.com/apis/v1.0/020b2c0f/search?score=42";
+            string apiUrl = @"https://sheetsu.com/apis/v1.0dc/020b2c0f/search?score=42";
 
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(apiUrl);
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
@@ -554,7 +554,7 @@ namespace Sheetsu
 import Foundation
 
 // Get all rows where column 'score' is '42'
-let url = String(format: "https://sheetsu.com/apis/v1.0/020b2c0f/search?score=42")
+let url = String(format: "https://sheetsu.com/apis/v1.0ds/020b2c0f/search?score=42")
 let serviceUrl = URL(string: url)
 var request = URLRequest(url: serviceUrl!)
 request.httpMethod = "GET"
@@ -580,7 +580,7 @@ library(httr)
 # Get all rows where column 'score' is '42'
 query <- list(score = 42)
 response <- GET(
-  "https://sheetsu.com/apis/v1.0/020b2c0f/search",
+  "https://sheetsu.com/apis/v1.0dl/020b2c0f/search",
   query = query
 )
 data <- content(response, "parsed")
@@ -590,7 +590,7 @@ data <- content(response, "parsed")
 # and column 'name' is 'Peter'
 query <- list(score = 42, name = "Peter")
 response <- GET(
-  "https://sheetsu.com/apis/v1.0/020b2c0f/search",
+  "https://sheetsu.com/apis/v1.0dl/020b2c0f/search",
   query = query
 )
 data <- content(response, "parsed")
@@ -600,7 +600,7 @@ data <- content(response, "parsed")
 # from sheet "Sheet2"
 query <- list(foo = "bar")
 response <- GET(
-  "https://sheetsu.com/apis/v1.0/020b2c0f/sheets/Sheet2/search",
+  "https://sheetsu.com/apis/v1.0dl/020b2c0f/sheets/Sheet2/search",
   query = query
 )
 data <- content(response, "parsed")
@@ -609,7 +609,7 @@ data <- content(response, "parsed")
 # Get all rows where column 'name' is contains string 'oi'
 query <- list(name = "*oi*")
 response <- GET(
-  "https://sheetsu.com/apis/v1.0/020b2c0f/search",
+  "https://sheetsu.com/apis/v1.0dl/020b2c0f/search",
   query = query
 )
 data <- content(response, "parsed")
@@ -626,7 +626,7 @@ class SheetsuSearch extends React.Component {
   }
 
   componentDidMount() {
-    fetch("https://sheetsu.com/apis/v1.0/020b2c0f/search?score=42")
+    fetch("https://sheetsu.com/apis/v1.0dt/020b2c0f/search?score=42")
       .then( (response) => {
         return response.json()
       }).then( (json) => {
@@ -661,7 +661,7 @@ class SheetsuSearch extends React.Component {
   }
 
   componentDidMount() {
-    fetch("https://sheetsu.com/apis/v1.0/020b2c0f/sheets/Sheet1/search?score=42")
+    fetch("https://sheetsu.com/apis/v1.0dt/020b2c0f/sheets/Sheet1/search?score=42")
       .then( (response) => {
         return response.json()
       }).then( (json) => {
