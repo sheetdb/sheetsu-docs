@@ -6,7 +6,7 @@ language_tabs:
   - xml: HTML Snippet
   - ruby: Ruby
   - javascript--node: Node
-  - html: JavaScript Web Client
+  - html--javascript: JavaScript Web Client
   - python: Python
   - php: PHP
   - javascript--jquery: JQuery

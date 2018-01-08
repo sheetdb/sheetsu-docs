@@ -14,7 +14,7 @@ Add below code before closing `</body>` tag.
 If you are using Google Analytics, add it right after the Google Analytics script.
 
 # Read data from Spreadsheet
-```xml
+```html
 <!--
   This code will get 3 first rows from
   Google Spreadsheet and display them
@@ -52,7 +52,7 @@ If you are using Google Analytics, add it right after the Google Analytics scrip
   </table>
 </blockquote>
 
-```xml
+```html
 <!--
   This code will get all rows from
   Google Spreadsheet where role is parent
@@ -112,7 +112,7 @@ Attributes you can use to manipulate results are `sheetsu-limit` and `sheetsu-of
 *(We add a little bit of CSS styling to the results on the right)*
 
 # Save data to Spreadsheet
-```xml
+```html
 <!--
   This code will display form, which will
   save record to the Google Spreadsheet

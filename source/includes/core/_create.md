@@ -125,7 +125,7 @@ client.create({ "foo": "bar", "another column": "quux" }, "Sheet2").then(functio
 });
 ```
 
-```html
+```html--javascript
 <head>
   <script src="//script.sheetsu.com/"></script>
 </head>

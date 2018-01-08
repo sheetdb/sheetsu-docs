@@ -72,7 +72,7 @@ client.read({ limit: 2, sheet: "Sheet2" }).then(function(data) {
 ```
 
 
-```html
+```html--javascript
 <head>
   <script src="//script.sheetsu.com/"></script>
 </head>
@@ -403,7 +403,7 @@ client.read({
 });
 ```
 
-```html
+```html--javascript
 <head>
   <script src="//script.sheetsu.com/"></script>
 </head>
